@@ -19,7 +19,7 @@ class DAO {
 	/**
 	 * Vérifie que la connexion n'est pas déjà faite anvant d'en lancer une autre
 	 */
-	private function checkConnection()
+	protected function checkConnection()
 	{
 		if ($this->_connection === null) {
 			return $this->getConnection();
@@ -30,19 +30,20 @@ class DAO {
 		}
 	}
 
-	
+
 
 
 	/**
 	 * Connection à la base de bonnées
 	 */
-	public function getConnection()
+	protected function getConnection()
 	{
 		try {
 			$connection = new PDO(DB_MYSQL, DB_USER, DB_PASS);
 			$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			//echo 'connexion OK';
 
-			return $this->_connection;
+			return $connection;
 
 			
 		} catch (Exception $errorConnection) {

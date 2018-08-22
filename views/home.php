@@ -1,6 +1,9 @@
 <?php 
+
 require '../src/DAO/DAO.php';
-use cyannlab\src\DAO\DAO;
+require '../src/DAO/ArticleDAO.php';
+
+use cyannlab\src\DAO\ArticleDAO;
 ?>
 
 <!DOCTYPE html>
@@ -14,9 +17,19 @@ use cyannlab\src\DAO\DAO;
 	<h3>EN CONSTRUCTION</h3>
 
 	<?php 
-	$db = new DAO;
-	$db->getConnection();
+	
+	$data = new ArticleDAO;
+	$articles = $data->getArticles();
+	
 
-	?>
+	while ($article=$articles->fetch()):?>
+		<div>
+			<h2><?= htmlspecialchars($article['title']);?></h2>
+			<p><?= htmlspecialchars($article['content']);?></p>
+			<p><?= htmlspecialchars($article['author']);?></p>
+			<p><?= htmlspecialchars($article['date_added']);?></p>
+		</div>
+
+	<?php endwhile;?>
 </body>
 </html>
