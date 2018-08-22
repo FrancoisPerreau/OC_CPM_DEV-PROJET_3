@@ -13,13 +13,10 @@ class ArticleDAO extends DAO
 	 */
 	public function getArticles()
 	{
+		$sql = 'SELECT * FROM articles ORDER BY date_added DESC';
+		$data = $this->sql($sql);
 		
-		$connection = $this->getConnection();
-
-		$sql = $connection->query('SELECT * FROM articles ORDER BY date_added DESC');	
-		
-		return $sql;
-
+		return $data;
 	}
 
 	/**
@@ -29,14 +26,9 @@ class ArticleDAO extends DAO
 	 */
 	public function getArticle($idArt)
 	{
-		$connection = $this->getConnection();
+		$sql = 'SELECT * FROM articles WHERE id = ?';
+		$data = $this->sql($sql, [$idArt]);
 
-		$sql = $connection->prepare('SELECT * FROM articles WHERE id = ?');
-		$sql->execute([$idArt]);
-
-		var_dump($sql);
-
-		return $sql;
-
+		return $data;
 	}
 }
