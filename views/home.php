@@ -18,18 +18,18 @@ use cyannlab\src\DAO\ArticleDAO;
 
 	<?php 
 	
-	$data = new ArticleDAO;
+	$data = new ArticleDAO();
 	$articles = $data->getArticles();
-	
 
 	while ($article=$articles->fetch()):?>
 		<div>
-			<h2><?= htmlspecialchars($article['title']);?></h2>
+			<h2><a href="http://jeanforteroche.dev/views/single.php?idArt=<?= htmlspecialchars($article['id']) ;?>"><?= htmlspecialchars($article['title']);?></a></h2>
 			<p><?= htmlspecialchars($article['content']);?></p>
 			<p><?= htmlspecialchars($article['author']);?></p>
 			<p><?= htmlspecialchars($article['date_added']);?></p>
 		</div>
 
 	<?php endwhile;?>
+	<?php $articles->closeCursor(); ?>
 </body>
 </html>
