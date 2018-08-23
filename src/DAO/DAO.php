@@ -45,7 +45,14 @@ abstract class DAO {
 		}
 	}
 
-
+	/**
+	 * Lance les requêtes à la base de données
+	 * Si il y à un paramètre alors execute une requête préparée
+	 * Sinon lance la requête
+	 * @param  string $sql         la requête
+	 * @param  array $parameters   les paramètres de la requête
+	 * @return array               le résultat de la requête
+	 */
 	protected function sql($sql, $parameters = null)
 	{
 		if ($parameters)
