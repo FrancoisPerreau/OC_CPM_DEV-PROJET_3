@@ -33,7 +33,7 @@ class Router
 			{
 				if ($_GET['route'] === 'article')
 				{					
-					$this->_frontController->article(htmlspecialchars($_GET['idArt']));
+					$this->_frontController->article(str_secur($_GET['idArt']));
 				}
 				else
 				{

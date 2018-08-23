@@ -1,6 +1,7 @@
 <?php 
 require '../config/dev.php';
 require '../config/Autoloader.php';
+require '../_functions/functions.php';
 
 \cyannlab\config\Autoloader::register();
 

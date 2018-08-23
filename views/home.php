@@ -18,10 +18,10 @@
 
 	while ($article=$articles->fetch()):?>
 		<div>
-			<h2><a href="../public/index.php?route=article&amp;idArt=<?= htmlspecialchars($article['id']) ;?>"><?= htmlspecialchars($article['title']);?></a></h2>
-			<p><?= htmlspecialchars($article['content']);?></p>
-			<p><?= htmlspecialchars($article['author']);?></p>
-			<p><?= htmlspecialchars($article['date_added']);?></p>
+			<h2><a href="../public/index.php?route=article&amp;idArt=<?= str_secur($article['id']) ;?>"><?= str_secur($article['title']);?></a></h2>
+			<p><?= str_secur($article['content']);?></p>
+			<p><?= str_secur($article['author']);?></p>
+			<p><?= str_secur($article['date_added_fr']);?></p>
 		</div>
 
 	<?php endwhile;?>

@@ -14,7 +14,7 @@ class CommentDAO extends DAO
 	 */
 	public function getCommentsFromArticle($idArt)
 	{
-		$sql = 'SELECT * FROM comments WHERE article_id = ?';
+		$sql = 'SELECT id, pseudo, content, DATE_FORMAT(date_added, "%d/%m/%Y à %Hh%i") AS date_added_fr, article_id, reported FROM comments WHERE article_id = ?';
 		$data = $this->sql($sql, [$idArt]);
 
 		return $data;

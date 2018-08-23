@@ -19,10 +19,10 @@
 	<?php $data = $article->fetch(); ?>
 
 	<div>
-		<h2><?= htmlspecialchars($data['title']);?></h2>
-		<p><?= htmlspecialchars($data['content']);?></p>
-		<p><?= htmlspecialchars($data['author']);?></p>
-		<p><?= htmlspecialchars($data['date_added']);?></p>
+		<h2><?= str_secur($data['title']);?></h2>
+		<p><?= str_secur($data['content']);?></p>
+		<p><?= str_secur($data['author']);?></p>
+		<p><?= str_secur($data['date_added_fr']);?></p>
 	</div>
 	<?php $article->closeCursor(); ?>
 
@@ -31,9 +31,9 @@
 
 		<?php while ($comment = $comments->fetch()): ?>
 			<div class="comment_container">
-				<h4><?= htmlspecialchars($comment['pseudo']); ?></h4>
-				<p><?= htmlspecialchars($comment['content']); ?></p>
-				<p><?= htmlspecialchars($comment['date_added']); ?></p>
+				<h4><?= str_secur($comment['pseudo']); ?></h4>
+				<p><?= str_secur($comment['content']); ?></p>
+				<p><?= str_secur($comment['date_added_fr']); ?></p>
 			</div>
 
 		<?php endwhile; ?>
