@@ -26,6 +26,9 @@ class FrontController
 	// MÉTHODES
 	// ===================================	
 
+	/**
+	 * Controller de la vue home
+	 */
 	public function home()
 	{
 		$articles = $this->_articleDAO->getArticles();
@@ -33,7 +36,9 @@ class FrontController
 		require '../views/home.php';
 	}
 
-
+	/**
+	 * Controller de la vue single
+	 */
 	public function article($idArt)
 	{
 		$article = $this->_articleDAO->getArticle($idArt);
