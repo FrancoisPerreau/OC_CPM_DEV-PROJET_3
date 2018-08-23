@@ -1,6 +1,6 @@
 <?php 
-use cyannlab\src\DAO\ArticleDAO;
-use cyannlab\src\DAO\CommentDAO;
+// use cyannlab\src\DAO\ArticleDAO;
+// use cyannlab\src\DAO\CommentDAO;
 ?>
 
 <!DOCTYPE html>
@@ -16,12 +16,7 @@ use cyannlab\src\DAO\CommentDAO;
 	<h3>EN CONSTRUCTION</h3>
 	<p><a href="../public/index.php">Retour à la liste des chapitres</a></p>
 
-	<?php 
-	$articleDao = new ArticleDAO();
-	$article = $articleDao->getArticle(htmlspecialchars($_GET['idArt']));
-
-	$data = $article->fetch();
-	?>
+	<?php $data = $article->fetch(); ?>
 
 	<div>
 		<h2><?= htmlspecialchars($data['title']);?></h2>
@@ -33,11 +28,8 @@ use cyannlab\src\DAO\CommentDAO;
 
 	<div class="comments_container">
 		<h3>Commentaires</h3>
-		<?php 
-		$commentDao = new CommentDAO();
-		$comments = $commentDao->getCommentsFromArticle(htmlspecialchars($_GET['idArt']));
 
-		while ($comment = $comments->fetch()): ?>
+		<?php while ($comment = $comments->fetch()): ?>
 			<div class="comment_container">
 				<h4><?= htmlspecialchars($comment['pseudo']); ?></h4>
 				<p><?= htmlspecialchars($comment['content']); ?></p>

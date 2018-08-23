@@ -1,10 +1,28 @@
 <?php 
 namespace cyannlab\config;
 
+use cyannlab\src\controller\FrontController;
+
 class Router
 {
+	// ATTRIBUT
+	// ===================================
+	private $_frontController;
+
+
+	// CONSTRUCTEUR
+	// ===================================
+	public function __construct()
+	{
+		$this->_frontController = new FrontController();
+	}
+
+
+
+
 	// MÉTHODES
 	// ===================================
+
 	/**
 	 * Définie la vue en fonction de l'argument route passé en GET
 	 */
@@ -14,9 +32,8 @@ class Router
 			if (isset($_GET['route']))
 			{
 				if ($_GET['route'] === 'article')
-				{
-					//$idArt = $_GET['idArt'];
-					require '../views/single.php';
+				{					
+					$this->_frontController->article(htmlspecialchars($_GET['idArt']));
 				}
 				else
 				{
@@ -24,7 +41,7 @@ class Router
 				}
 			}
 			else {
-				require '../views/home.php';
+				$this->_frontController->home();
 			}
 		}
 		catch (Exception $e)

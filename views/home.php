@@ -1,5 +1,5 @@
 <?php 
-use cyannlab\src\DAO\ArticleDAO;
+//use cyannlab\src\DAO\ArticleDAO;
 ?>
 
 <!DOCTYPE html>
@@ -14,8 +14,7 @@ use cyannlab\src\DAO\ArticleDAO;
 
 	<?php 
 	
-	$data = new ArticleDAO();
-	$articles = $data->getArticles();
+	
 
 	while ($article=$articles->fetch()):?>
 		<div>
