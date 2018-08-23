@@ -2,8 +2,6 @@
 namespace cyannlab\src\DAO;
 use PDO;
 
-require '../config/dev.php';
-
 abstract class DAO {
 
 	// ATTRIBUTS

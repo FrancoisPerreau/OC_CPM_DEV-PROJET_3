@@ -1,7 +1,4 @@
 <?php 
-require '../config/Autoloader.php';
-\cyannlab\config\Autoloader::register();
-
 use cyannlab\src\DAO\ArticleDAO;
 use cyannlab\src\DAO\CommentDAO;
 ?>
@@ -17,7 +14,7 @@ use cyannlab\src\DAO\CommentDAO;
 <body>
 	<h1>Blog de Jean Forteroche</h1>
 	<h3>EN CONSTRUCTION</h3>
-	<p><a href="http://jeanforteroche.dev/views/home.php">Retour à la liste des chapitres</a></p>
+	<p><a href="../public/index.php">Retour à la liste des chapitres</a></p>
 
 	<?php 
 	$articleDao = new ArticleDAO();

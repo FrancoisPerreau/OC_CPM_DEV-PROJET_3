@@ -1,7 +1,4 @@
 <?php 
-require '../config/Autoloader.php';
-\cyannlab\config\Autoloader::register();
-
 use cyannlab\src\DAO\ArticleDAO;
 ?>
 
@@ -22,7 +19,7 @@ use cyannlab\src\DAO\ArticleDAO;
 
 	while ($article=$articles->fetch()):?>
 		<div>
-			<h2><a href="http://jeanforteroche.dev/views/single.php?idArt=<?= htmlspecialchars($article['id']) ;?>"><?= htmlspecialchars($article['title']);?></a></h2>
+			<h2><a href="../public/index.php?route=article&amp;idArt=<?= htmlspecialchars($article['id']) ;?>"><?= htmlspecialchars($article['title']);?></a></h2>
 			<p><?= htmlspecialchars($article['content']);?></p>
 			<p><?= htmlspecialchars($article['author']);?></p>
 			<p><?= htmlspecialchars($article['date_added']);?></p>
