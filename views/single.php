@@ -16,15 +16,13 @@
 	<h3>EN CONSTRUCTION</h3>
 	<p><a href="../public/index.php">Retour à la liste des chapitres</a></p>
 
-	<?php $data = $article->fetch(); ?>
-
 	<div>
-		<h2><?= str_secur($data['title']);?></h2>
-		<p><?= str_secur($data['content']);?></p>
-		<p><?= str_secur($data['author']);?></p>
-		<p><?= str_secur($data['date_added_fr']);?></p>
+		<h2><?= str_secur($article->getTitle());?></h2>
+		<p><?= str_secur($article->getContent());?></p>
+		<p><?= str_secur($article->getAuthor());?></p>
+		<p><?= str_secur($article->getDateAdded());?></p>
 	</div>
-	<?php $article->closeCursor(); ?>
+	<?php //$article->closeCursor(); ?>
 
 	<div class="comments_container">
 		<h3>Commentaires</h3>

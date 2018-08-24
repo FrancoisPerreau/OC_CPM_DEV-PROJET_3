@@ -1,7 +1,7 @@
 <?php 
 namespace cyannlab\src\model;
 
-class Article
+class ArticleModel
 {
 	// ATRIBUTS
 	// =============================

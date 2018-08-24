@@ -12,19 +12,14 @@
 	<h1>Blog de Jean Forteroche</h1>
 	<h3>EN CONSTRUCTION</h3>
 
-	<?php 
-	
-	
-
-	while ($article=$articles->fetch()):?>
+	<?php foreach ($articles as $article):?>
 		<div>
-			<h2><a href="../public/index.php?route=article&amp;idArt=<?= str_secur($article['id']) ;?>"><?= str_secur($article['title']);?></a></h2>
-			<p><?= str_secur($article['content']);?></p>
-			<p><?= str_secur($article['author']);?></p>
-			<p><?= str_secur($article['date_added_fr']);?></p>
+			<h2><a href="../public/index.php?route=article&amp;idArt=<?= str_secur($article->getId()) ;?>"><?= str_secur($article->getTitle());?></a></h2>
+			<p><?= str_secur($article->getContent());?></p>
+			<p><?= str_secur($article->getAuthor());?></p>
+			<p><?= str_secur($article->getDateAdded());?></p>
 		</div>
-
-	<?php endwhile;?>
-	<?php $articles->closeCursor(); ?>
+	<?php endforeach;?>
+	
 </body>
 </html>
