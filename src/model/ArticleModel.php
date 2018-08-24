@@ -9,14 +9,17 @@ class ArticleModel
 	private $_title;
 	private $_content;
 	private $_author;
-	private $_date_added;
+	private $_dateAdded;
 
 
 
 	// MÉTHODES
 	// =============================
 
-
+	public function getResume()
+	{
+		return substr($this->_content, 0, 500) . ' ...';
+	}
 
 	// SETTERS ---------------------
 	/**
@@ -37,7 +40,7 @@ class ArticleModel
 	{
 		if (is_string($title) && strlen($title) < 255)
 		{
-			$this->_title = $title;
+			$this->_title = str_secur($title);
 		}		
 	}
 
@@ -47,7 +50,7 @@ class ArticleModel
 	public function setContent($content)
 	{
 		if (is_string($content)) {
-			$this->_content = $content;
+			$this->_content = str_secur($content);
 		}		
 	}
 
@@ -58,16 +61,16 @@ class ArticleModel
 	{
 		if (is_string($author) && strlen($author) <= 100)
 		{
-			$this->_author = $author;
+			$this->_author = str_secur($author);
 		}		
 	}
 
 	/**
-	 * @param $date_added
+	 * @param $dateAdded
 	 */
-	public function setDateAdded($date_added)
+	public function setDateAdded($dateAdded)
 	{
-		$this->_date_added = $date_added;
+		$this->_dateAdded = str_secur($dateAdded);
 	}
 
 
@@ -95,5 +98,5 @@ class ArticleModel
 	/**
 	 * @return $_date_added
 	 */
-	public function getDateAdded() {return $this->_date_added;}
+	public function getDateAdded() {return $this->_dateAdded;}
 }

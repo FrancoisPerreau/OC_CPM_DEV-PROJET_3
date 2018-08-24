@@ -27,15 +27,15 @@
 	<div class="comments_container">
 		<h3>Commentaires</h3>
 
-		<?php while ($comment = $comments->fetch()): ?>
+		<?php foreach ($comments as $comment): ?>
 			<div class="comment_container">
-				<h4><?= str_secur($comment['pseudo']); ?></h4>
-				<p><?= str_secur($comment['content']); ?></p>
-				<p><?= str_secur($comment['date_added_fr']); ?></p>
+				<h4><?= str_secur($comment->getPseudo()); ?></h4>
+				<p><?= str_secur($comment->getContent()); ?></p>
+				<p><?= str_secur($comment->getDateAdded()); ?></p>
 			</div>
 
-		<?php endwhile; ?>
-		<?php $comments->closeCursor(); ?>
+		<?php endforeach; ?>
+		<?php //$comments->closeCursor(); ?>
 		
 	</div>
 	

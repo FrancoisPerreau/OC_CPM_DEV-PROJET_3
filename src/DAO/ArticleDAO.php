@@ -17,7 +17,7 @@ class ArticleDAO extends DAO
 		$sql = 'SELECT id, title, content, author, DATE_FORMAT(date_added, "%d/%m/%Y à %Hh%i") AS date_added_fr FROM articles ORDER BY date_added DESC';
 		$data = $this->sql($sql);
 
-		$articles= [];
+		$articles = [];
 
 		foreach ($data->fetchAll() as $row)
 		{
@@ -36,8 +36,7 @@ class ArticleDAO extends DAO
 	public function getArticle($idArt)
 	{
 		$sql = 'SELECT id, title, content, author, DATE_FORMAT(date_added, "%d/%m/%Y à %Hh%i") AS date_added_fr FROM articles WHERE id = ?';
-		$data = $this->sql($sql, [$idArt]);
-		
+		$data = $this->sql($sql, [$idArt]);		
 
 		$article = $this->buildArticle($data->fetch());
 
