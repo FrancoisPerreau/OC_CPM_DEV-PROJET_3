@@ -18,7 +18,7 @@
 
 	<div>
 		<h2><?= str_secur($article->getTitle());?></h2>
-		<p><?= str_secur($article->getContent());?></p>
+		<p><?= nl2br(str_secur($article->getContent()));?></p>
 		<p><?= str_secur($article->getAuthor());?></p>
 		<p><?= str_secur($article->getDateAdded());?></p>
 	</div>
