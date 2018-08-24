@@ -39,8 +39,13 @@ class FrontController
 	/**
 	 * Controller de la vue single
 	 */
-	public function article($idArt)
+	public function article($idArt, $action = null)
 	{
+		if ($action)
+		{
+			$addComment = $this->_commentDAO->addComment($_POST, $idArt);
+		}
+
 		$article = $this->_articleDAO->getArticle($idArt);
 		$comments = $this->_commentDAO->getCommentsFromArticle($idArt);
 

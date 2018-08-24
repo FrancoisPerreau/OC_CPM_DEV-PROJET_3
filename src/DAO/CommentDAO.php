@@ -15,7 +15,7 @@ class CommentDAO extends DAO
 	 */
 	public function getCommentsFromArticle($idArt)
 	{
-		$sql = 'SELECT id, pseudo, content, DATE_FORMAT(date_added, "%d/%m/%Y à %Hh%i") AS date_added_fr, article_id, reported FROM comments WHERE article_id = ?';
+		$sql = 'SELECT id, pseudo, content, DATE_FORMAT(date_added, "%d/%m/%Y à %Hh%i") AS date_added_fr, article_id, reported FROM comments  WHERE article_id = ? ORDER BY date_added DESC';
 		$data = $this->sql($sql, [$idArt]);
 
 		$comments = [];
@@ -27,7 +27,6 @@ class CommentDAO extends DAO
 		
 		return $comments;
 	}
-
 
 
 	/**
@@ -46,6 +45,32 @@ class CommentDAO extends DAO
 		$comment->setReported($row['reported']);
 
 		return $comment;
+	}
+
+
+	public function addComment($post, $idArt)
+	{
+		// echo $post['pseudo'] . '<br>';
+		// echo $post['content'];
+		extract($post);
+
+		if (empty($pseudo))
+		{
+			echo 'Vous devez saisire un pseudo';
+		}
+
+		if (empty($content))
+		{
+			echo 'Vous devez saisire un commentaire';
+		}
+
+		$sql = 'INSERT INTO comments(pseudo, content, date_added, article_id) VALUES(?, ?, NOW(), ?)';
+		$this->sql($sql, [$pseudo, $content,$idArt]);
+
+
+		header('location: ../public/index.php?route=article&idArt='. $idArt);
+
+		
 	}
 
 }

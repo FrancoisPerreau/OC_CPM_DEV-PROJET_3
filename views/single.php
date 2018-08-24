@@ -49,7 +49,7 @@
 	<!-- ======================= -->
 	<div class="form_container">
 		<h3>Ajouter un commentaire</h3>
-		<form action="../public/index.php?route=article&amp;idArt=<?= str_secur($article->getId()) ;?>&amp;action=adComment" method="post">
+		<form action="../public/index.php?route=article&amp;idArt=<?= str_secur($article->getId()) ;?>&amp;action=addComment" method="post">
 			<p>
 				<label for="pseudo">Pseudo</label><br>
 				<input type="text" id="pseudo" name="pseudo" value="<?= (!empty($_POST['pseudo'])) ? $_POST['pseudo'] :'' ; ?>">

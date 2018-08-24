@@ -32,15 +32,24 @@ class Router
 			if (isset($_GET['route']))
 			{
 				if ($_GET['route'] === 'article')
-				{					
-					$this->_frontController->article(str_secur($_GET['idArt']));
+				{	
+					if (isset($_GET['action']) && $_GET['action'] === 'addComment')
+					{
+						$this->_frontController->article(str_secur($_GET['idArt']), str_secur($_GET['action']));
+					}
+					else 
+					{
+						$this->_frontController->article(str_secur($_GET['idArt']));
+					}			
+
 				}
 				else
 				{
 					echo 'Cette page n\'existe pas';
 				}
 			}
-			else {
+			else
+			{
 				$this->_frontController->home();
 			}
 		}
