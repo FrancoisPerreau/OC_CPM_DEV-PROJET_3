@@ -16,7 +16,10 @@
 	<h3>EN CONSTRUCTION</h3>
 	<p><a href="../public/index.php">Retour à la liste des chapitres</a></p>
 
-	<div>
+
+	<!-- Affichage du chapitre -->
+	<!-- ===================== -->
+	<div class="article_container">
 		<h2><?= str_secur($article->getTitle());?></h2>
 		<p><?= nl2br(str_secur($article->getContent()));?></p>
 		<p><?= str_secur($article->getAuthor());?></p>
@@ -24,6 +27,9 @@
 	</div>
 	<?php //$article->closeCursor(); ?>
 
+
+	<!-- Affichage des commentaires -->
+	<!-- ========================== -->
 	<div class="comments_container">
 		<h3>Commentaires</h3>
 
@@ -35,8 +41,25 @@
 			</div>
 
 		<?php endforeach; ?>
-		<?php //$comments->closeCursor(); ?>
-		
+		<?php //$comments->closeCursor(); ?>		
+	</div>
+
+
+	<!-- Affichage du formulaire -->
+	<!-- ======================= -->
+	<div class="form_container">
+		<h3>Ajouter un commentaire</h3>
+		<form action="../public/index.php?route=article&amp;idArt=<?= str_secur($article->getId()) ;?>&amp;action=adComment" method="post">
+			<p>
+				<label for="pseudo">Pseudo</label><br>
+				<input type="text" id="pseudo" name="pseudo" value="<?= (!empty($_POST['pseudo'])) ? $_POST['pseudo'] :'' ; ?>">
+			</p>
+			<p>
+				<label for="content">Message</label><br>
+				<textarea name="content" id="content" cols="30" rows="10"><?= (!empty($_POST['content'])) ? $_POST['content'] :'' ; ?></textarea>
+			</p>
+			<button type="submit">Envoyer</button>
+		</form>
 	</div>
 	
 </body>
