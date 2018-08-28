@@ -49,7 +49,18 @@ class FrontController
 		$article = $this->_articleDAO->getArticle($idArt);
 		$comments = $this->_commentDAO->getCommentsFromArticle($idArt);
 
+		//session_start();
+
 		require '../views/single.php';
+
+		if (isset($_SESSION['errorPseudo'])) {
+			unset($_SESSION['errorPseudo']);
+		}
+		
+		if (isset($_SESSION['errorContent'])) {
+			unset($_SESSION['errorContent']);
+		}
+		
 
 	}
 }

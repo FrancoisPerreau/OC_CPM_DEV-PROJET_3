@@ -17,6 +17,34 @@ class CommentModel
 
 	// MÉTHODES
 	// =============================
+	/**
+	 * Vérifie les données passées avant de les enregistrées en base de données
+	 * @param  string $pseudo
+	 * @param  string $content
+	 * @return boolean
+	 */
+	static function controlAddComment($pseudo, $content)
+	{
+		session_start();
+
+		if (isset($pseudo) && !empty($pseudo) && strlen($pseudo) <= 100)
+		{
+			if (isset($content) && !empty($content))
+			{
+				return true;
+			}
+			else
+			{
+				$_SESSION['errorContent'] = 'Vous devez saisir un message.';
+			}
+		}
+		else
+		{
+			$_SESSION['errorPseudo'] = 'Vous devez saisir un pseudo de moins de 100 caractères.';
+		}
+	}
+
+
 
 	// SETTERS ---------------------
 

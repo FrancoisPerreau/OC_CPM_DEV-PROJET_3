@@ -50,25 +50,16 @@ class CommentDAO extends DAO
 
 	public function addComment($post, $idArt)
 	{
-		// echo $post['pseudo'] . '<br>';
-		// echo $post['content'];
 		extract($post);
-
-		if (empty($pseudo))
+		
+		if (CommentModel::controlAddComment($pseudo, $content))
 		{
-			echo 'Vous devez saisire un pseudo';
+			$sql = 'INSERT INTO comments(pseudo, content, date_added, article_id) VALUES(?, ?, NOW(), ?)';
+			$this->sql($sql, [str_secur($pseudo), str_secur($content), $idArt]);
+
+			header('location: ../public/index.php?route=article&idArt='. $idArt);
 		}
-
-		if (empty($content))
-		{
-			echo 'Vous devez saisire un commentaire';
-		}
-
-		$sql = 'INSERT INTO comments(pseudo, content, date_added, article_id) VALUES(?, ?, NOW(), ?)';
-		$this->sql($sql, [$pseudo, $content,$idArt]);
-
-
-		header('location: ../public/index.php?route=article&idArt='. $idArt);
+		
 
 		
 	}

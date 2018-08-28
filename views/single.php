@@ -53,10 +53,12 @@
 			<p>
 				<label for="pseudo">Pseudo</label><br>
 				<input type="text" id="pseudo" name="pseudo" value="<?= (!empty($_POST['pseudo'])) ? $_POST['pseudo'] :'' ; ?>">
+				<?= (isset($_SESSION['errorPseudo'])) ? '<p>' . $_SESSION['errorPseudo'] . '</p>' :''; ?>
 			</p>
 			<p>
 				<label for="content">Message</label><br>
 				<textarea name="content" id="content" cols="30" rows="10"><?= (!empty($_POST['content'])) ? $_POST['content'] :'' ; ?></textarea>
+				<?= (isset($_SESSION['errorContent'])) ? '<p>' . $_SESSION['errorContent'] . '</p>' :''; ?>
 			</p>
 			<button type="submit">Envoyer</button>
 		</form>
