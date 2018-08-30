@@ -65,10 +65,12 @@ class CommentDAO extends DAO
 		}		
 	}
 
-	public function reportedComment($idComment, $idArt)
-	{
-		$sql = 'UPDATE comments SET reported = true WHERE id = ?';
-		$this->sql($sql,[str_secur($idComment)]);
+	public function reportedComment($idComment, $idArt, $nbReporte)
+	{		
+		$data = $nbReporte + 1;		
+
+		$sql = 'UPDATE comments SET reported = ? WHERE id = ?';
+		$this->sql($sql,[$data, str_secur($idComment)]);
 
 		header('location: ../public/index.php?route=article&idArt='. $idArt . '#comments_post');
 	}

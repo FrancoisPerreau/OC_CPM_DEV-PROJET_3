@@ -38,7 +38,7 @@ class Router
 						$this->_frontController->article(str_secur($_GET['idArt']), str_secur($_GET['action']));
 					}
 					elseif (isset($_GET['action']) && $_GET['action'] === 'reported') {
-						$this->_frontController->article(str_secur($_GET['idArt']), str_secur($_GET['action']), str_secur($_GET['idComment']));
+						$this->_frontController->article(str_secur($_GET['idArt']), str_secur($_GET['action']), str_secur($_GET['idComment']), str_secur($_GET['nbReported']));
 					}
 					else 
 					{

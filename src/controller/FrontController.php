@@ -54,17 +54,19 @@ class FrontController
 	/**
 	 * Controller de la vue single
 	 */
-	public function article($idArt, $action = null, $idComment = null)
+	public function article($idArt, $action = null, $idComment = null, $nbReporte = null)
 	{
 		$data =[];
 
 		if ($action === 'addComment')
 		{
-			$data['addComment'] = $this->_commentDAO->addComment($_POST, $idArt);			
+			$this->_commentDAO->addComment($_POST, $idArt);			
 		}
 
 		if ($action === 'reported') {
-			$data['reported'] = $this->_commentDAO->reportedComment($idComment, $idArt);
+			// $data['reported'] = $this->_commentDAO->reportedComment($idComment, $idArt);
+			
+			$this->_commentDAO->reportedComment($idComment, $idArt, $nbReporte);
 		}
 
 		$data['article'] = $this->_articleDAO->getArticle($idArt);

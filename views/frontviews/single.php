@@ -52,12 +52,14 @@ $this->_title = $article->getTitle();
 			<?php foreach ($comments as $comment): ?>
 				<ul class="list-group list-group-flush comment_container">
 					<li class="list-group-item list-group-item-info list-groupe-title"><strong><?= str_secur($comment->getPseudo()); ?> <span class="date font-weight-light">- le <?= str_secur($comment->getDateAdded()); ?></span></strong>
-						<?php if ($comment->getReported()): ?>							
-							<div class="badge badge-warning reported">COMMENTAIRE SIGNALÉ</div>							
-						<?php endif; ?>
-						<?php if (!$comment->getReported()): ?>
-							<a class="btn btn-outline-info btn-sm" href="../public/index.php?route=article&amp;idArt=<?= str_secur($article->getId());?>&amp;action=reported&amp;idComment=<?= str_secur($comment->getId());?>">Signaler ce commentaire</a></li>
-						<?php endif; ?>
+						
+						
+						<a class="btn btn-outline-info btn-sm" href="../public/index.php?route=article&amp;idArt=<?= str_secur($article->getId());?>&amp;action=reported&amp;idComment=<?= str_secur($comment->getId());?>&amp;nbReported=<?= str_secur($comment->getReported());?>">Signaler ce commentaire 
+							<?php if($comment->getReported() > 0) : ?>
+								<span class="badge badge-warning reported"><?= str_secur($comment->getReported()); ?></span>
+							<?php endif; ?>
+						</a></li>
+
 						<li class="list-group-item"><?= str_secur($comment->getContent()); ?></li>					
 					</ul>
 				<?php endforeach; ?>

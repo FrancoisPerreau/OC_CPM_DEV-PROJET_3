@@ -108,7 +108,7 @@ class CommentModel
 	 */
 	public function setReported($reported)
 	{
-		$reported = (bool) $reported;
+		$reported = (int) str_secur($reported);
 		$this->_reported = $reported;
 	}
 
@@ -142,7 +142,7 @@ class CommentModel
 	/**
 	 * @return $_reported
 	 */
-	public function getReported() { return (bool) $this->_reported; }
+	public function getReported() { return $this->_reported; }
 
 }	
 

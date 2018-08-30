@@ -135,7 +135,8 @@ section {
 }
 
 .reported {
-	padding: 0.7125rem;
+	margin-left: 5px;
+	/*padding: 0.25rem;*/
 }
 
 .list-group-item {
