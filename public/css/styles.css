@@ -1,13 +1,155 @@
-.comments_container, .form_container {
-	margin-top: 50px;
-	margin-left: 50px;
-	border-top: 3px solid #ddd;
 
-	font-size: 14px;
+/*========== GÉNÉRALE ==========*/
+/*===============================*/
+
+body {
+	padding-top: 3.5rem;
+}
+
+header
+{
+	display: flex;
+	height: 550px;
+	
+	background: url(../img/glacier.jpg) no-repeat center;
+	background-size: cover;
+
+	color: #fff;
+}
+
+header p {
+	font-size: 1.75rem;
+	letter-spacing: 2px;
+}
+
+h2 {
+	font-size: 2.75rem;
+	letter-spacing: 1px;	
+}
+
+section {
+	padding: 60px 0;
+
+}
+
+.bg-dark {
+	background-color: #1c3546!important;
+}
+
+
+
+/*========== HOME ==========*/
+/*===========================*/
+
+.presentation {
+	margin-bottom: 50px;	
+	background-color: #eee;
+}
+
+.portrait {
+	width: 100%;
+	padding: 0 40px;
+	border-bottom: 3px solid #1c3546;
+	margin-bottom: 30px;
+}
+
+.presentation h2 {
+	margin-bottom: 30px;
+}
+
+.presentation p {
+	font-size: 1.1rem;
+}
+
+
+.resum-article {	
+	/*height: 100%;*/
+	margin-top: 60px;
+	padding: 15px;
+
+	border: 1px solid #1c3546;
+	/*background-color: #eee;*/
+}
+
+.img-resum-article {	
+	margin: auto;
+	margin: -15px -15px 30px -15px;
+	height: 200px;
+	background: url(../img/great-horned.jpg) no-repeat center;
+	background-size: cover ;
+}
+
+.resum-btn {
+	margin-top: 30px;
+}
+
+
+
+/*========== SINGLE ==========*/
+/*=============================*/
+.infos-top {
+	padding: 8px 0;
+	background-color: #eee;	
+}
+
+.infos-top p {
+	padding: 0;
+	margin: 0;
+	font-size: 0.9rem;
+	line-height: 0.9rem;
+}
+
+.article_container {
+	
+}
+
+
+.sigle-title {
+	
+}
+
+.article-content {
+	margin-top: 50px;
+}
+
+.comments_container {
+	/*margin-top: 50px;
+	margin-left: 50px;
+	border-top: 3px solid #ddd;*/
+	background-color: #eee;	
+	
+	text-align: center;
+	/*font-size: 14px;*/
 }
 
 .comment_container {
-	padding-top: 5px;
-	border-top: 1px solid #eee;
+	padding-top: 25px;
+	/*border-top: 1px solid #1c3546;*/
 
+}
+
+.list-groupe-title {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.reported {
+	padding: 0.7125rem;
+}
+
+.list-group-item {
+	padding: 0.5rem 1.25rem;
+}
+
+.date {
+	font-size: 0.9em;
+}
+
+.comments_form_container {
+	margin-bottom: 50px;
+}
+
+.form-group {
+	text-align: left!important;
 }

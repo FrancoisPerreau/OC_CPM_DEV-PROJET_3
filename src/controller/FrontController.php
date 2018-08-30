@@ -3,6 +3,7 @@ namespace cyannlab\src\controller;
 
 use cyannlab\src\DAO\ArticleDAO;
 use cyannlab\src\DAO\CommentDAO;
+use cyannlab\src\model\View;
 
 class FrontController
 {
@@ -10,6 +11,7 @@ class FrontController
 	// ===================================	
 	private $_articleDAO;
 	private $_commentDAO;
+	private $_view;
 
 
 	// CONSTRUCTEUR
@@ -18,6 +20,7 @@ class FrontController
 	{
 		$this->_articleDAO = new ArticleDAO();
 		$this->_commentDAO = new CommentDAO();
+		$this->_view = new View();
 	}
 
 
@@ -31,27 +34,43 @@ class FrontController
 	 */
 	public function home()
 	{
+		$articles = $this->_articleDAO->getLastArticles();
+
+		$this->_view->renderFront('home', ['articles' => $articles]);
+
+		// require '../views/frontviews/home.php';
+	}
+
+	/**
+	 * Controller de la vue listearticles
+	 */
+	public function listeArticles()
+	{
 		$articles = $this->_articleDAO->getArticles();
 
-		require '../views/home.php';
+		$this->_view->renderFront('listearticles', ['articles' => $articles]);
 	}
 
 	/**
 	 * Controller de la vue single
 	 */
-	public function article($idArt, $action = null)
+	public function article($idArt, $action = null, $idComment = null)
 	{
-		if ($action)
+		$data =[];
+
+		if ($action === 'addComment')
 		{
-			$addComment = $this->_commentDAO->addComment($_POST, $idArt);
+			$data['addComment'] = $this->_commentDAO->addComment($_POST, $idArt);			
 		}
 
-		$article = $this->_articleDAO->getArticle($idArt);
-		$comments = $this->_commentDAO->getCommentsFromArticle($idArt);
+		if ($action === 'reported') {
+			$data['reported'] = $this->_commentDAO->reportedComment($idComment, $idArt);
+		}
 
-		//session_start();
+		$data['article'] = $this->_articleDAO->getArticle($idArt);
+		$data['comments'] = $this->_commentDAO->getCommentsFromArticle($idArt);
 
-		require '../views/single.php';
+		$this->_view->renderFront('single', $data);
 
 		if (isset($_SESSION['errorPseudo'])) {
 			unset($_SESSION['errorPseudo']);
@@ -60,7 +79,11 @@ class FrontController
 		if (isset($_SESSION['errorContent'])) {
 			unset($_SESSION['errorContent']);
 		}
-		
+	}
 
+
+	public function contact()
+	{
+		$this->_view->renderFront('contact');
 	}
 }

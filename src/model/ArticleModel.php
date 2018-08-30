@@ -18,7 +18,7 @@ class ArticleModel
 
 	public function getResume()
 	{
-		return substr($this->_content, 0, 500) . ' ...';
+		return substr($this->_content, 0, 400) . ' ...';
 	}
 
 	// SETTERS ---------------------

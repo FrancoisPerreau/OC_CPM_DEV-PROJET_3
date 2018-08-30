@@ -14,7 +14,7 @@ class ArticleDAO extends DAO
 	 */
 	public function getArticles()
 	{
-		$sql = 'SELECT id, title, content, author, DATE_FORMAT(date_added, "%d/%m/%Y à %Hh%i") AS date_added_fr FROM articles ORDER BY date_added DESC';
+		$sql = 'SELECT id, title, content, author, DATE_FORMAT(date_added, "%d/%m/%Y à %Hh%i") AS date_added_fr FROM articles ORDER BY date_added';
 		$data = $this->sql($sql);
 
 		$articles = [];
@@ -27,6 +27,28 @@ class ArticleDAO extends DAO
 		//var_dump($articles);
 		return $articles; 
 	}
+
+
+	/**
+	 * Retourne la requette pour la liste des articles classés par date triée en ordre decroissant
+	 * @return array
+	 */
+	public function getLastArticles()
+	{
+		$sql = 'SELECT id, title, content, author, DATE_FORMAT(date_added, "%d/%m/%Y à %Hh%i") AS date_added_fr FROM articles ORDER BY date_added DESC LIMIT 3';
+		$data = $this->sql($sql);
+
+		$articles = [];
+
+		foreach ($data->fetchAll() as $row)
+		{
+			$articles[] = $this->buildArticle($row);
+		}
+
+		//var_dump($articles);
+		return $articles; 
+	}
+
 
 	/**
 	 * Retourne la requette pour un article en fonction de l'id passé en argument

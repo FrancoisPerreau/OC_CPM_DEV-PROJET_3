@@ -47,7 +47,11 @@ class CommentDAO extends DAO
 		return $comment;
 	}
 
-
+	/**
+	 * Ajout un commentaire en BDD
+	 * @param string $post
+	 * @param string $idArt
+	 */
 	public function addComment($post, $idArt)
 	{
 		extract($post);
@@ -57,11 +61,16 @@ class CommentDAO extends DAO
 			$sql = 'INSERT INTO comments(pseudo, content, date_added, article_id) VALUES(?, ?, NOW(), ?)';
 			$this->sql($sql, [str_secur($pseudo), str_secur($content), $idArt]);
 
-			header('location: ../public/index.php?route=article&idArt='. $idArt);
-		}
-		
+			header('location: ../public/index.php?route=article&idArt='. $idArt . '#comments_post');
+		}		
+	}
 
-		
+	public function reportedComment($idComment, $idArt)
+	{
+		$sql = 'UPDATE comments SET reported = true WHERE id = ?';
+		$this->sql($sql,[str_secur($idComment)]);
+
+		header('location: ../public/index.php?route=article&idArt='. $idArt . '#comments_post');
 	}
 
 }

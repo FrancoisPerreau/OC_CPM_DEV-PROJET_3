@@ -47,7 +47,6 @@ class CommentModel
 
 
 	// SETTERS ---------------------
-
 	public function setId($id)
 	{
 		$id = (int) str_secur($id);
@@ -76,7 +75,7 @@ class CommentModel
 	 */
 	public function setContent($content)
 	{
-		if (is_string($content))
+		if (is_string(nl2br($content)))
 		{
 			$this->_content = str_secur($content);
 		}
@@ -109,10 +108,8 @@ class CommentModel
 	 */
 	public function setReported($reported)
 	{
-		if (is_bool($reported))
-		{
-			$this->_reported = $reported;
-		}
+		$reported = (bool) $reported;
+		$this->_reported = $reported;
 	}
 
 
@@ -145,7 +142,7 @@ class CommentModel
 	/**
 	 * @return $_reported
 	 */
-	public function getReported() { return $this->_reported; }
+	public function getReported() { return (bool) $this->_reported; }
 
 }	
 

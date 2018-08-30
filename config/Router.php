@@ -37,11 +37,22 @@ class Router
 					{
 						$this->_frontController->article(str_secur($_GET['idArt']), str_secur($_GET['action']));
 					}
+					elseif (isset($_GET['action']) && $_GET['action'] === 'reported') {
+						$this->_frontController->article(str_secur($_GET['idArt']), str_secur($_GET['action']), str_secur($_GET['idComment']));
+					}
 					else 
 					{
 						$this->_frontController->article(str_secur($_GET['idArt']));
 					}			
 
+				}
+				elseif ($_GET['route'] === 'liste')
+				{
+					$this->_frontController->listeArticles();
+				}
+				elseif ($_GET['route'] === 'contact')
+				{
+					$this->_frontController->contact();
 				}
 				else
 				{
