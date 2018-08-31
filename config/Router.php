@@ -31,6 +31,7 @@ class Router
 		try {
 			if (isset($_GET['route']))
 			{
+				// SIGLE ------------------------------
 				if ($_GET['route'] === 'article')
 				{	
 					if (isset($_GET['action']) && $_GET['action'] === 'addComment')
@@ -43,22 +44,35 @@ class Router
 					else 
 					{
 						$this->_frontController->article(str_secur($_GET['idArt']));
-					}			
-
+					}
 				}
+
+				// LISTE ------------------------------
 				elseif ($_GET['route'] === 'liste')
 				{
 					$this->_frontController->listeArticles();
 				}
+
+				// CONTACT ------------------------------
 				elseif ($_GET['route'] === 'contact')
 				{
-					$this->_frontController->contact();
+					if (isset($_GET['action']) && $_GET['action'] === 'postMessage')
+					{
+						$this->_frontController->contact(str_secur($_GET['action']));
+					}
+					else
+					{
+						$this->_frontController->contact();
+					}
+					
 				}
 				else
 				{
 					echo 'Cette page n\'existe pas';
 				}
 			}
+
+			// HOME ------------------------------
 			else
 			{
 				$this->_frontController->home();

@@ -1,5 +1,4 @@
 <?php
-
 namespace cyannlab\src\model;
 
 class View

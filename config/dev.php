@@ -13,3 +13,7 @@ const DB_MYSQL = 'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charste=' .D
 const DB_USER = 'root';
 // define('DB_PASS', 'root');
 const DB_PASS = 'root';
+
+
+const EMAIL = 'contact@cyannlab.com';
+const AUTHOR = 'Jean Forteroche';

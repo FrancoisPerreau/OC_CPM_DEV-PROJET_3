@@ -154,3 +154,16 @@ section {
 .form-group {
 	text-align: left!important;
 }
+
+
+/*========== CONTACT ==========*/
+/*=============================*/
+.container-contact {
+	background-color: #eee;
+}
+
+.contact-title {
+	margin-bottom: 25px;
+}
+
+
