@@ -40,8 +40,6 @@ class FrontController
 		$articles = $this->_articleDAO->getLastArticles();
 
 		$this->_view->renderFront('home', ['articles' => $articles]);
-
-		// require '../views/frontviews/home.php';
 	}
 
 	/**
@@ -63,13 +61,14 @@ class FrontController
 
 		if ($action === 'addComment')
 		{
-			$this->_commentDAO->addComment($_POST, $idArt);			
+			$this->_commentDAO->addComment($_POST, $idArt);	
+			header('location: ../public/index.php?route=article&idArt='. $idArt . '#comments_post');		
 		}
 
-		if ($action === 'reported') {
-			// $data['reported'] = $this->_commentDAO->reportedComment($idComment, $idArt);
-			
+		if ($action === 'reported')
+		{				
 			$this->_commentDAO->reportedComment($idComment, $idArt, $nbReporte);
+			header('location: ../public/index.php?route=article&idArt='. $idArt . '#comments_post');
 		}
 
 		$data['article'] = $this->_articleDAO->getArticle($idArt);
@@ -77,44 +76,53 @@ class FrontController
 
 		$this->_view->renderFront('single', $data);
 
-		if (isset($_SESSION['errorPseudo'])) {
+		if (isset($_SESSION['errorPseudo']))
+		{
 			unset($_SESSION['errorPseudo']);
 		}
 		
-		if (isset($_SESSION['errorContent'])) {
+		if (isset($_SESSION['errorContent']))
+		{
 			unset($_SESSION['errorContent']);
 		}
 	}
 
-
+	/**
+	 * Controller de la vue contact
+	 */
 	public function contact($action = null)
 	{
 		
 		if ($action === 'postMessage')
 		{
-			$this->_contact->postMessage($_POST);;
+			$this->_contact->postMessage($_POST);			
 		}
 		
 		$this->_view->renderFront('contact');
 		
 
-		if (isset($_SESSION['errorFirstName'])) {
+		if (isset($_SESSION['errorFirstName']))
+		{
 			unset($_SESSION['errorFirstName']);
 		}
 
-		if (isset($_SESSION['errorLastName'])) {
+		if (isset($_SESSION['errorLastName']))
+		{
 			unset($_SESSION['errorLastName']);
 		}
 
-		if (isset($_SESSION['errorEmail'])) {
+		if (isset($_SESSION['errorEmail']))
+		{
 			unset($_SESSION['errorEmail']);
 		}
 
-		if (isset($_SESSION['errorContent'])) {
+		if (isset($_SESSION['errorContent']))
+		{
 			unset($_SESSION['errorContent']);
 		}
 
-		if (isset($_SESSION['success'])) {
+		if (isset($_SESSION['success']))
+		{
 			unset($_SESSION['success']);
 		}
 	}

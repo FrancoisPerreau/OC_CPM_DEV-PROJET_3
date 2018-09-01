@@ -60,8 +60,6 @@ class CommentDAO extends DAO
 		{
 			$sql = 'INSERT INTO comments(pseudo, content, date_added, article_id) VALUES(?, ?, NOW(), ?)';
 			$this->sql($sql, [str_secur($pseudo), str_secur($content), $idArt]);
-
-			header('location: ../public/index.php?route=article&idArt='. $idArt . '#comments_post');
 		}		
 	}
 
@@ -71,8 +69,6 @@ class CommentDAO extends DAO
 
 		$sql = 'UPDATE comments SET reported = ? WHERE id = ?';
 		$this->sql($sql,[$data, str_secur($idComment)]);
-
-		header('location: ../public/index.php?route=article&idArt='. $idArt . '#comments_post');
 	}
 
 }

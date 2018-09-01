@@ -16,25 +16,25 @@ $title = $this->getPageTitle();
 
 			<div class="form-group">
 				<label for="firstName">Prenom</label><br>
-				<input type="text" id="firstName" name="firstName" class="form-control" required value="<?= (!empty($_POST['firstName'])) ? $_POST['firstName'] : ''; ?>">
+				<input type="text" id="firstName" name="firstName" class="form-control" required value="<?= (!empty($_POST['firstName']) && !isset($_SESSION['success'])) ? $_POST['firstName'] : ''; ?>">
 				<?= (isset($_SESSION['errorFirstName'])) ? '<div class="text-danger">' . $_SESSION['errorFirstName'] . '</div>' : '' ;?>
 			</div>
 
 			<div class="form-group">
 				<label for="lastName">Nom</label><br>
-				<input type="text" id="lastName" name="lastName" class="form-control" required value="<?= (!empty($_POST['lastName'])) ? $_POST['lastName'] : ''; ?>">
+				<input type="text" id="lastName" name="lastName" class="form-control" required value="<?= (!empty($_POST['lastName']) && !isset($_SESSION['success'])) ? $_POST['lastName'] : ''; ?>">
 				<?= (isset($_SESSION['errorLastName'])) ? '<div class="text-danger">' . $_SESSION['errorLastName'] . '</div>' : '' ;?>
 			</div>
 
 			<div class="form-group">
 				<label for="email">E-mail</label><br>
-				<input type="email" id="email" name="email" class="form-control" required value="<?= (!empty($_POST['email'])) ? $_POST['email'] : ''; ?>">
+				<input type="email" id="email" name="email" class="form-control" required value="<?= (!empty($_POST['email']) && !isset($_SESSION['success'])) ? $_POST['email'] : ''; ?>">
 				<?= (isset($_SESSION['errorEmail'])) ? '<div class="text-danger">' . $_SESSION['errorEmail'] . '</div>' : '' ;?>
 			</div>
 
 			<div class="form-group">
 				<label for="content">Message</label><br>
-				<textarea name="content" id="content" class="form-control" required cols="30" rows="6"><?= (!empty($_POST['content'])) ? $_POST['content'] : ''; ?></textarea>
+				<textarea name="content" id="content" class="form-control" required cols="30" rows="6"><?= (!empty($_POST['content']) && !isset($_SESSION['success'])) ? $_POST['content'] : ''; ?></textarea>
 				<?= (isset($_SESSION['errorContent'])) ? '<div class="text-danger">' . $_SESSION['errorContent'] . '</div>' : '' ;?>
 			</div>
 
