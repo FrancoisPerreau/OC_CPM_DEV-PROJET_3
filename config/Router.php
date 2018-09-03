@@ -2,12 +2,14 @@
 namespace cyannlab\config;
 
 use cyannlab\src\controller\FrontController;
+use cyannlab\src\controller\BackController;
 
 class Router
 {
 	// ATTRIBUT
 	// ===================================
 	private $_frontController;
+	private $_backController;
 
 
 	// CONSTRUCTEUR
@@ -15,6 +17,7 @@ class Router
 	public function __construct()
 	{
 		$this->_frontController = new FrontController();
+		$this->_backController = new BackController();
 	}
 
 
@@ -63,9 +66,33 @@ class Router
 					else
 					{
 						$this->_frontController->contact();
-					}
-					
+					}					
 				}
+
+				// CONNEXION ------------------------------
+				elseif ($_GET['route'] === 'connection')
+				{
+					if (isset($_GET['action']) && $_GET['action'] === 'attemptConnection')
+					{
+						$this->_backController->connection(str_secur($_GET['action']));
+					}
+					else
+					{
+						$this->_backController->connection();
+					}					
+				}
+				// DÉCONNEXION ------------------------------
+				elseif ($_GET['route'] === 'deconnection')
+				{
+					$this->_backController->adminDeconnection();
+				}
+
+				// ADMIN-HOME ------------------------------
+				elseif ($_GET['route'] === 'adminHome')
+				{
+					$this->_backController->adminHome();
+				}				
+
 				else
 				{
 					echo 'Cette page n\'existe pas';

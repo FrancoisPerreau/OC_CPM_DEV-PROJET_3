@@ -6,6 +6,18 @@ body {
 	padding-top: 3.5rem;
 }
 
+footer {
+	background-color: #1c3546;
+	height: 50px;
+}
+
+footer p {
+	color: #fff;
+	margin-bottom: 0;
+
+	line-height: 50px;
+}
+
 header
 {
 	display: flex;
@@ -34,6 +46,10 @@ section {
 
 .bg-dark {
 	background-color: #1c3546!important;
+}
+
+.bgcg {
+	background-color: #eee;
 }
 
 
@@ -158,9 +174,7 @@ section {
 
 /*========== CONTACT ==========*/
 /*=============================*/
-.container-contact {
-	background-color: #eee;
-}
+
 
 .contact-title {
 	margin-bottom: 25px;

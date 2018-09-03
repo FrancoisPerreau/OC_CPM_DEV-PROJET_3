@@ -2,7 +2,7 @@
 $this->setTitle('Contact');
 $title = $this->getPageTitle();
 ?>
-<div class="container-fluid container-contact">
+<div class="container-fluid bgcg">
 
 	<section class="container">		
 		<h1 id="contact" class="col-12 col-md-6 offset-md-3 contact-title text-center">Contactez-moi...</h1>
@@ -38,7 +38,7 @@ $title = $this->getPageTitle();
 				<?= (isset($_SESSION['errorContent'])) ? '<div class="text-danger">' . $_SESSION['errorContent'] . '</div>' : '' ;?>
 			</div>
 
-			<button class="btn btn-outline-info" type="submit">Envoyer</button>
+			<button class="btn btn-outline-info btn-block" type="submit">Envoyer</button>
 
 		</form>
 	</section>

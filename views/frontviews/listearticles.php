@@ -14,7 +14,7 @@ $title = $this->getPageTitle();
 					<h3><?= str_secur($article->getTitle());?></h3>
 					<p class="text-muted"><em>Publié le <?= str_secur($article->getDateAdded());?></em></p>
 					<p><?= str_secur($article->getResume());?></p>
-					<p class="text-center resum-btn"><a class="btn btn-outline-info" href="../public/index.php?route=article&amp;idArt=<?= str_secur($article->getId());?>" role="button">Lire la suite &raquo;</a></p>
+					<p class="text-center resum-btn"><a class="btn btn-outline-info btn-block" href="../public/index.php?route=article&amp;idArt=<?= str_secur($article->getId());?>" role="button">Lire la suite &raquo;</a></p>
 				</div>
 			</div>
 		<?php endforeach;?>        

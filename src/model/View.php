@@ -12,6 +12,8 @@ class View
 
     // MÉTHODES
     // =============================
+
+    // Gestion des vues Front
     public function renderFront($templateFront, $data = [])
     {
         $this->_file = '../views/frontviews/'.$templateFront.'.php';
@@ -23,6 +25,21 @@ class View
         echo $view;
     }
 
+
+    // Gestion des vues Back
+    public function renderBack($templateFront, $data = [])
+    {
+        $this->_file = '../views/backviews/'.$templateFront.'.php';
+        $content  = $this->renderFile($this->_file, $data);
+        $view = $this->renderFile('../views/backviews/backbase.php', [
+            'title' => $this->_title,
+            'content' => $content
+        ]);
+        echo $view;
+    }
+
+
+    // Inclusion des contenus des vues dans le template de base
     private function renderFile($file, $data)
     {
         if(file_exists($file)){
@@ -35,6 +52,9 @@ class View
             echo 'Fichier inexistant';
         }
     }
+
+
+    
 
     // SETTERS ---------------------
     public function setTitle($title)

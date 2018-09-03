@@ -43,7 +43,7 @@ $this->_title = $article->getTitle();
 						<textarea name="content" id="content" class="form-control" required cols="30" rows="3"><?= (!empty($_POST['content'])) ? $_POST['content'] :'' ; ?></textarea>
 						<?= (isset($_SESSION['errorContent'])) ? '<p>' . $_SESSION['errorContent'] . '</p>' :''; ?>
 					</div>
-					<button class="btn btn-outline-info" type="submit">Envoyer</button>
+					<button class="btn btn-outline-info btn-block" type="submit">Envoyer</button>
 				</form>
 			</div><!-- /Form-container -->
 
