@@ -59,11 +59,14 @@ $this->_title = $article->getTitle();
 								<span class="badge badge-warning reported"><?= str_secur($comment->getReported()); ?></span>
 							<?php endif; ?>
 						</a></li>
+						<?php if($comment->getModerate()) : ?>
+							<li class="list-group-item text-uppercase text-warning">Commentaire modéré</li>
+							<?php else : ?>
+								<li class="list-group-item"><?= str_secur($comment->getContent()); ?></li>	
+							<?php endif; ?>				
+						</ul>
+					<?php endforeach; ?>
+				</div><!-- /col commentaires -->
 
-						<li class="list-group-item"><?= str_secur($comment->getContent()); ?></li>					
-					</ul>
-				<?php endforeach; ?>
-			</div><!-- /col commentaires -->
-
-		</div><!-- /container -->
-	</section>
+			</div><!-- /container -->
+		</section>

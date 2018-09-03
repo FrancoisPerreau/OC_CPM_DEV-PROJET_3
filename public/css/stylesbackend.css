@@ -9,3 +9,29 @@
 	display: flex;
 	align-items: center;
 }
+
+
+/*========== ADMIN HOME ==========*/
+/*================================*/
+.admin-top {
+	margin:0 -15px;
+	padding: 8px 0;
+	background-color: #ddd;
+}
+
+.admin-top p {
+	margin: 0;
+}
+
+/*======== ADMIN COMMENTS ========*/
+/*================================*/
+.container-reported {
+	margin-bottom: 50px;
+}
+.admin-reported-list {
+
+}
+
+.comment-list {
+	margin: 0;
+}

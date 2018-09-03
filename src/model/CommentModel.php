@@ -11,6 +11,9 @@ class CommentModel
 	private $_dateAdded;
 	private $_articleId;
 	private $_reported;
+	private $_moderate;
+
+	private $_artTitle;
 
 
 
@@ -112,6 +115,18 @@ class CommentModel
 		$this->_reported = $reported;
 	}
 
+	public function setModerate($moderate)
+	{
+		$moderate =  str_secur($moderate);
+		$this->_moderate = $moderate;
+	}
+
+
+	public function setArticleTitle($articleTitle)
+	{
+		$this->_artTitle = str_secur($articleTitle);
+	}
+
 
 	// GETTERS ---------------------
 	/**
@@ -143,6 +158,10 @@ class CommentModel
 	 * @return $_reported
 	 */
 	public function getReported() { return $this->_reported; }
+
+	public function getModerate() { return $this->_moderate; }
+
+	public function getArticleTitle() { return $this->_artTitle; }
 
 }	
 

@@ -1,13 +1,3 @@
-<?php
-session_start();
-
-if(!isset($_SESSION['id']))
-{
-	header('Location: ../public/index.php');
-}
-?>
-
-
 <!doctype html>
 <html lang="fr">
 <head>
@@ -40,40 +30,16 @@ if(!isset($_SESSION['id']))
 				<li class="nav-item  <?= (empty($_GET['route'])) ? 'active' : '' ; ?>">
 					<a class="nav-link" href="../public/index.php">Retour au site</a></li>
 				</ul>
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item <?= (isset($_GET['route']) && $_GET['route'] === 'liste') ? 'active' : '' ; ?>">
-						<a class="nav-link" href="../public/index.php?route=adminHome">accueil</a>
-					</li>
+				
+			</ul>
+		</div>
+	</nav>
 
-					<li class="nav-item">
-						<a class="nav-link" href="../public/index.php?route=admincomments">commentaires</a>
-					</li>
+	<main role="main">
+		
 
-					<li class="nav-item">
-						<a class="nav-link" href="../public/index.php?route=adminarticles">chapitres</a>
-					</li>
-
-					<li class="nav-item">
-						<a class="nav-link" href="../public/index.php?route=adminarticle">créer un chapitre</a>
-					</li>
-
-					<li class="nav-item">
-						<a class="nav-link" href="../public/index.php?route=adminprofil">profil</a>
-					</li>
-					<?php if (isset($_SESSION['id'])) : ?>
-						<li class="nav-item">
-							<a class="nav-link" href="../public/index.php?route=deconnection">déconnexion</a>
-						</li>
-					<?php endif; ?>
-				</ul>
-			</div>
-		</nav>
-
-		<main role="main">
-			
-
-			<?= $content; ?>
+		<?= $content; ?>
 
 
-		</main>
-		<?php require '../views/footer.php' ?>
+	</main>
+	<?php require '../views/footer.php' ?>

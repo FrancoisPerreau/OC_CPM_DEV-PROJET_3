@@ -90,8 +90,28 @@ class Router
 				// ADMIN-HOME ------------------------------
 				elseif ($_GET['route'] === 'adminHome')
 				{
-					$this->_backController->adminHome();
+					if (isset($_GET['action']) && $_GET['action'] === 'moderate')
+					{
+						$this->_backController->adminHome(str_secur($_GET['action']), str_secur($_GET['idComment']));
+					}
+					else
+					{
+						$this->_backController->adminHome();
+					}					
 				}				
+
+				// ADMIN-COMMENTS ------------------------------
+				elseif ($_GET['route'] ==='admincomments')
+				{
+					if (isset($_GET['action']) && $_GET['action'] === 'moderate')
+					{
+						$this->_backController->adminComments(str_secur($_GET['action']), str_secur($_GET['idComment']));
+					}
+					else
+					{
+						$this->_backController->adminComments();
+					}
+				}
 
 				else
 				{

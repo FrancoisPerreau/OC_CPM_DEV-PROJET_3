@@ -39,6 +39,23 @@ class View
     }
 
 
+
+    // Gestion de la vue Connexion
+    public function renderConnexion($templateFront, $data = [])
+    {
+        $this->_file = '../views/connexionview/'.$templateFront.'.php';
+        $content  = $this->renderFile($this->_file, $data);
+
+
+        $view = $this->renderFile('../views/connexionview/connexionbase.php', [
+            'title' => $this->_title,
+            'content' => $content
+        ]);
+        
+        echo $view;
+    }
+
+
     // Inclusion des contenus des vues dans le template de base
     private function renderFile($file, $data)
     {
