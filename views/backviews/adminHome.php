@@ -1,5 +1,4 @@
 <?php
-//session_start();
 $this->setTitle('ADMIN-Home');
 $title = $this->getPageTitle();
 ?>
@@ -32,7 +31,7 @@ $title = $this->getPageTitle();
 							<span class="admin-groupBTN">
 								<a href="../public/index.php?route=article&amp;idArt=<?= str_secur($article->getId());?>" class="btn btn-outline-secondary btn-sm">voir</a>
 
-								<a href="" class="btn btn-outline-info btn-sm">éditer</a>
+								<a href="../public/index.php?route=edit&amp;action=editArticle&amp;idArt=<?= str_secur($article->getId());?>" class="btn btn-outline-info btn-sm">éditer</a>
 
 								<a href="../public/index.php?route=delete&amp;action=delateArticle&amp;idArt=<?= str_secur($article->getId());?>" class="btn btn-outline-danger btn-sm">suprimer</a>
 							</span>
@@ -61,7 +60,7 @@ $title = $this->getPageTitle();
 								</span>
 							</p>
 							<span class="admin-groupBTN">
-								<a href="" class="btn btn-outline-info btn-sm">éditer</a>
+								<a href="../public/index.php?route=edit&amp;action=editDraft&amp;idDraft=<?= str_secur($draft->getId());?>" class="btn btn-outline-info btn-sm">éditer</a>
 
 								<a href="../public/index.php?route=delete&amp;action=delateDraft&amp;idDraft=<?= str_secur($draft->getId());?>" class="btn btn-outline-danger btn-sm">suprimer</a>
 							</span>

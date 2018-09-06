@@ -111,7 +111,29 @@ class Router
 						$this->_backController->adminDelete(str_secur($_GET['action']), str_secur($_GET['id']), str_secur($_GET['subject']));
 					}
 
-				}		
+				}	
+
+				// ADMIN-EDIT ------------------------
+				elseif ($_GET['route'] === 'edit')
+				{
+					if (isset($_GET['action']) && $_GET['action'] === 'editArticle')
+					{
+						$this->_backController->adminEdit(str_secur($_GET['action']), str_secur($_GET['idArt']));
+					}
+					elseif (isset($_GET['action']) && $_GET['action'] === 'editDraft')
+					{
+						$this->_backController->adminEdit(str_secur($_GET['action']), str_secur($_GET['idDraft']));
+					}
+
+				}
+
+				// ADMIN-CREATE CHAPTER ------------------------
+				elseif ($_GET['route'] === 'adminCreate')
+				{
+					
+					$this->_backController->adminCreate();
+
+				}	
 
 				// ADMIN-COMMENTS ------------------------------
 				elseif ($_GET['route'] ==='adminComments')
@@ -124,14 +146,6 @@ class Router
 					{
 						$this->_backController->adminComments();
 					}
-				}
-
-				// ADMIN-CREATE CHAPTER ------------------------
-				elseif ($_GET['route'] === 'adminCreate')
-				{
-					
-					$this->_backController->adminCreate();
-
 				}
 
 				// ADMIN-PROFIL ------------------------

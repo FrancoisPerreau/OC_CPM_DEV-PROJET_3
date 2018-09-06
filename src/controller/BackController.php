@@ -121,6 +121,24 @@ class BackController
 	}
 
 
+	public function adminEdit($action, $id)
+	{
+		$data = [];
+
+		if ($action === 'editArticle')
+		{
+			$data['article'] = $this->_articleDAO->getArticle($id);
+		}
+
+		if ($action === 'editDraft')
+		{
+			$data['draft'] = $this->_draftDAO->getDraft($id);
+		}
+
+		$this->_view->renderBack('adminEdit', $data);
+	}
+
+
 	/**
 	 * Controller de la vue adminComments
 	 */
