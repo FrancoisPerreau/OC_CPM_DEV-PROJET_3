@@ -54,6 +54,8 @@ section {
 
 
 
+
+
 /*========== HOME ==========*/
 /*===========================*/
 
@@ -82,16 +84,25 @@ section {
 	/*height: 100%;*/
 	margin-top: 60px;
 	padding: 15px;
+	
 
 	border: 1px solid #1c3546;
 	/*background-color: #eee;*/
+}
+
+.resum-article p {
+	/*margin:0;*/
+	padding: 0;
+
 }
 
 .img-resum-article {	
 	margin: auto;
 	margin: -15px -15px 30px -15px;
 	height: 200px;
-	background: url(../img/great-horned.jpg) no-repeat center;
+	
+	background-repeat: no-repeat;
+	background-position: center;
 	background-size: cover ;
 }
 

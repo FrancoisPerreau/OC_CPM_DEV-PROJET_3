@@ -15,5 +15,8 @@ const DB_USER = 'root';
 const DB_PASS = 'root';
 
 
+const URI_IMAGE_CHAPTER = '../public/img/chapters/';
+
+
 const EMAIL = 'contact@cyannlab.com';
 const AUTHOR = 'Jean Forteroche';

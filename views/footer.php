@@ -8,6 +8,8 @@
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
 <script src="../public/js/popper.min.js"></script>
 <script src="../public/js/bootstrap.min.js"></script>
+<script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
+<script src="../public/js/script.js"></script>
 </body>
 </html>
 

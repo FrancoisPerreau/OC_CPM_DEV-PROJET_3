@@ -51,9 +51,17 @@ abstract class DAO {
 	 * @param  array $parameters   les paramètres de la requête
 	 * @return array               le résultat de la requête
 	 */
-	protected function sql($sql, $parameters = null)
+	protected function sql($sql, $parameters = null, $count = null)
 	{
-		if ($parameters)
+		if ($parameters && $count === 1) {
+			$db = $this->checkConnection();
+			$reqEx = $db->prepare($sql);
+			$reqEx->execute($parameters);
+			$result = $reqEx->fetchColumn();
+
+			return  (bool) $result;
+		}
+		elseif ($parameters) 
 		{
 			$db = $this->checkConnection();
 			$data = $db->prepare($sql);

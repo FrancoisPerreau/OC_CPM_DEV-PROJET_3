@@ -13,7 +13,7 @@ class CommentModel
 	private $_reported;
 	private $_moderate;
 
-	private $_artTitle;
+	private $_artChapter;
 
 
 
@@ -122,9 +122,9 @@ class CommentModel
 	}
 
 
-	public function setArticleTitle($articleTitle)
+	public function setArticleChapter($artChapter)
 	{
-		$this->_artTitle = str_secur($articleTitle);
+		$this->_artChapter = str_secur($artChapter);
 	}
 
 
@@ -161,7 +161,7 @@ class CommentModel
 
 	public function getModerate() { return $this->_moderate; }
 
-	public function getArticleTitle() { return $this->_artTitle; }
+	public function getArticleChapter() { return $this->_artChapter; }
 
 }	
 

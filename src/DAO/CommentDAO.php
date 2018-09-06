@@ -10,6 +10,23 @@ class CommentDAO extends DAO
 	// ===================================
 
 	/**
+	 * Ajout un commentaire en BDD
+	 * @param string $post
+	 * @param string $idArt
+	 */
+	public function addComment($post, $idArt)
+	{
+		extract($post);
+		
+		if (CommentModel::controlAddComment($pseudo, $content))
+		{
+			$sql = 'INSERT INTO comments(pseudo, content, date_added, article_id) VALUES(?, ?, NOW(), ?)';
+			$this->sql($sql, [str_secur($pseudo), str_secur($content), $idArt]);
+		}		
+	}
+
+
+	/**
 	 * Retourne un commentaire en fonction de son id
 	 * @param  $id
 	 * @return array
@@ -64,28 +81,12 @@ class CommentDAO extends DAO
 
 
 		$comment->setArticleId($row['article_id']);
-		if (isset($row['artTitle'])) {
-			$comment->setArticleTitle($row['artTitle']);
+		if (isset($row['artChapter'])) {
+			$comment->setArticleChapter($row['artChapter']);
 		}
 		
 
 		return $comment;
-	}
-
-	/**
-	 * Ajout un commentaire en BDD
-	 * @param string $post
-	 * @param string $idArt
-	 */
-	public function addComment($post, $idArt)
-	{
-		extract($post);
-		
-		if (CommentModel::controlAddComment($pseudo, $content))
-		{
-			$sql = 'INSERT INTO comments(pseudo, content, date_added, article_id) VALUES(?, ?, NOW(), ?)';
-			$this->sql($sql, [str_secur($pseudo), str_secur($content), $idArt]);
-		}		
 	}
 
 	/**
@@ -108,7 +109,7 @@ class CommentDAO extends DAO
 	 */
 	public function getReoprtedComments()
 	{
-		$sql = 'SELECT com.id, com.pseudo, com.content, DATE_FORMAT(com.date_added, "%d/%m/%Y à %Hh%i") AS date_added_fr, com.article_id, com.reported, art.title AS artTitle, com.moderate
+		$sql = 'SELECT com.id, com.pseudo, com.content, DATE_FORMAT(com.date_added, "%d/%m/%Y à %Hh%i") AS date_added_fr, com.article_id, com.reported, art.chapter AS artChapter, com.moderate
 		FROM comments AS com
 		INNER JOIN articles AS art ON art.id = com.article_id
 		WHERE reported > 0 ORDER BY reported DESC';

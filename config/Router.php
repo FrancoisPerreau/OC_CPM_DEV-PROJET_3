@@ -90,18 +90,31 @@ class Router
 				// ADMIN-HOME ------------------------------
 				elseif ($_GET['route'] === 'adminHome')
 				{
-					if (isset($_GET['action']) && $_GET['action'] === 'moderate')
+					
+					$this->_backController->adminHome();
+
+				}
+
+				// ADMIN-DELETE ------------------------------
+				elseif ($_GET['route'] === 'delete')
+				{
+					if (isset($_GET['action']) && $_GET['action'] === 'delateArticle')
 					{
-						$this->_backController->adminHome(str_secur($_GET['action']), str_secur($_GET['idComment']));
+						$this->_backController->adminDelete(str_secur($_GET['action']), str_secur($_GET['idArt']));
 					}
-					else
+					elseif (isset($_GET['action']) && $_GET['action'] === 'delateDraft')
 					{
-						$this->_backController->adminHome();
-					}					
-				}				
+						$this->_backController->adminDelete(str_secur($_GET['action']), str_secur($_GET['idDraft']));
+					}
+					elseif (isset($_GET['action']) && $_GET['action'] === 'deleteConfirm')
+					{
+						$this->_backController->adminDelete(str_secur($_GET['action']), str_secur($_GET['id']), str_secur($_GET['subject']));
+					}
+
+				}		
 
 				// ADMIN-COMMENTS ------------------------------
-				elseif ($_GET['route'] ==='admincomments')
+				elseif ($_GET['route'] ==='adminComments')
 				{
 					if (isset($_GET['action']) && $_GET['action'] === 'moderate')
 					{
@@ -112,6 +125,24 @@ class Router
 						$this->_backController->adminComments();
 					}
 				}
+
+				// ADMIN-CREATE CHAPTER ------------------------
+				elseif ($_GET['route'] === 'adminCreate')
+				{
+					
+					$this->_backController->adminCreate();
+
+				}
+
+				// ADMIN-PROFIL ------------------------
+				elseif ($_GET['route'] === 'adminProfil')
+				{
+					
+					$this->_backController->adminProfil();
+
+				}		
+
+
 
 				else
 				{

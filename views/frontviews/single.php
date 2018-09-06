@@ -4,7 +4,7 @@ $this->_title = $article->getTitle();
 <div class="container-fluid  infos-top">
 	<div class="container">
 		<p class="text-muted">
-			<a class="ariane" href="../public/index.php">Accueil</a> | <a class="ariane" href="../public/index.php?route=liste">La liste des chapitres</a> | <?= str_secur($article->getTitle()); ?>
+			<a class="ariane" href="../public/index.php">Accueil</a> | <a class="ariane" href="../public/index.php?route=liste">La liste des chapitres</a> | Chapitre <?= str_secur($article->getChapter()); ?>
 		</p>
 	</div>
 </div>

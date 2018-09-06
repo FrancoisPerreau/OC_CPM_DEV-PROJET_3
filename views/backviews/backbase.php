@@ -46,19 +46,15 @@ if(!isset($_SESSION['id']))
 					</li>
 
 					<li class="nav-item">
-						<a class="nav-link" href="../public/index.php?route=admincomments">commentaires</a>
+						<a class="nav-link" href="../public/index.php?route=adminComments">commentaires</a>
 					</li>
 
 					<li class="nav-item">
-						<a class="nav-link" href="../public/index.php?route=adminarticles">chapitres</a>
+						<a class="nav-link" href="../public/index.php?route=adminCreate">créer un chapitre</a>
 					</li>
 
 					<li class="nav-item">
-						<a class="nav-link" href="../public/index.php?route=adminarticle">créer un chapitre</a>
-					</li>
-
-					<li class="nav-item">
-						<a class="nav-link" href="../public/index.php?route=adminprofil">profil</a>
+						<a class="nav-link" href="../public/index.php?route=adminProfil">profil</a>
 					</li>
 					<?php if (isset($_SESSION['id'])) : ?>
 						<li class="nav-item">
