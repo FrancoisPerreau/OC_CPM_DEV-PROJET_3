@@ -15,6 +15,7 @@ $title = $this->getPageTitle();
 	<!-- Les chapitres -->
 	<section class="container">
 		<div class="container-admin-articles">
+			<?= (isset($validate)) ? '<div class="alert alert-success">' . $validate . '</div>' :'';?>
 			<h4>Liste des chapitres</h4>
 			<?php foreach ($articles as $article): ?>
 				<div>
@@ -31,9 +32,9 @@ $title = $this->getPageTitle();
 							<span class="admin-groupBTN">
 								<a href="../public/index.php?route=article&amp;idArt=<?= str_secur($article->getId());?>" class="btn btn-outline-secondary btn-sm">voir</a>
 
-								<a href="../public/index.php?route=edit&amp;action=editArticle&amp;idArt=<?= str_secur($article->getId());?>" class="btn btn-outline-info btn-sm">éditer</a>
+								<a href="../public/index.php?route=adminEdit&amp;action=editArticle&amp;idArt=<?= str_secur($article->getId());?>" class="btn btn-outline-info btn-sm">éditer</a>
 
-								<a href="../public/index.php?route=delete&amp;action=delateArticle&amp;idArt=<?= str_secur($article->getId());?>" class="btn btn-outline-danger btn-sm">suprimer</a>
+								<a href="../public/index.php?route=delete&amp;action=delateArticle&amp;idArt=<?= str_secur($article->getId());?>" class="btn btn-outline-danger btn-sm">supprimer</a>
 							</span>
 						</li>
 					</ul>
@@ -53,22 +54,26 @@ $title = $this->getPageTitle();
 						<li class="list-group-item list-group-item-secondary list-groupe-title admin-listGroup">
 							<p>
 								<span class="listGroupe-bolck-imag">
-									<img src="<?= URI_IMAGE_CHAPTER . $draft->getImageName(); ?>" alt="">
-								</span>
-								<span class="text-muted text-uppercase">
-									Brouillon chapitre <?= $draft->getChapter(); ?>
-								</span>
-							</p>
-							<span class="admin-groupBTN">
-								<a href="../public/index.php?route=edit&amp;action=editDraft&amp;idDraft=<?= str_secur($draft->getId());?>" class="btn btn-outline-info btn-sm">éditer</a>
+									<?php if (!empty($draft->getImageName())) : ?>
+										<img src="<?= URI_IMAGE_CHAPTER . $draft->getImageName(); ?>" alt="">
+										<?php else : ?>
+											<img src="<?= '../public/img/image-type.jpg'; ?>" alt="">
+										<?php endif; ?>
+									</span>
+									<span class="text-muted text-uppercase">
+										Brouillon chapitre <?= $draft->getChapter(); ?>
+									</span>
+								</p>
+								<span class="admin-groupBTN">
+									<a href="../public/index.php?route=adminEdit&amp;action=editDraft&amp;idDraft=<?= str_secur($draft->getId());?>" class="btn btn-outline-info btn-sm">éditer</a>
 
-								<a href="../public/index.php?route=delete&amp;action=delateDraft&amp;idDraft=<?= str_secur($draft->getId());?>" class="btn btn-outline-danger btn-sm">suprimer</a>
-							</span>
-						</li>
-					</ul>
-				</div>
-			<?php endforeach; ?>			
-		</div><!-- /admin-articles -->
-	</section>
+									<a href="../public/index.php?route=delete&amp;action=delateDraft&amp;idDraft=<?= str_secur($draft->getId());?>" class="btn btn-outline-danger btn-sm">supprimer</a>
+								</span>
+							</li>
+						</ul>
+					</div>
+				<?php endforeach; ?>			
+			</div><!-- /admin-articles -->
+		</section>
 
-</div>
+	</div>

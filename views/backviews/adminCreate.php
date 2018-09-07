@@ -15,6 +15,7 @@ $title = $this->getPageTitle();
 			<?= (isset($validate)) ? '<div class="alert alert-success">' . $validate . '</div>' :'';?>
 			
 			<div class="form-row">
+
 				<div class="col-md-6 form-group">					
 					<input type="text" id="chapter" name="chapter" class="form-control" placeholder="Chapitre n°"  value="<?= (!empty($_POST['chapter']) && !isset($validate)) ? $_POST['chapter'] :'' ; ?>">
 
@@ -24,7 +25,7 @@ $title = $this->getPageTitle();
 				<div class="col-md-6 form-group">
 					
 					<input type="file" id="imageArticle" name="imageArticle" class="custom-file-input"  value="">	
-					<label class="custom-file-label" for="imageArticle" lang="fr">Image <span class="text-muted">(.jpg de 960px de large)</span></label>
+					<label class="custom-file-label" for="imageArticle" lang="fr">Image <?= (isset($_FILES['imageArticle']) ? '<span class="text-info">' . $_FILES['imageArticle']['name'] . '</span>': '<span class="text-muted">(.jpg de 960px de large)</span>');?></label>
 					<?= (isset($error['imageEmpty'])) ? '<div class="text-danger">' . $error['imageEmpty'] . '</div>' :'';?>
 					<?= (isset($error['imageType'])) ? '<div class="text-danger">' . $error['imageType'] . '</div>' :'';?>
 					<?= (isset($error['imageSize'])) ? '<div class="text-danger">' . $error['imageSize'] . '</div>' :'';?>	
@@ -50,15 +51,3 @@ $title = $this->getPageTitle();
 		</form>
 	</div><!-- /container -->
 </div><!-- /container-fluid -->
-
-
-
-
-<div class="form-group">
-	<input type="title" id="title" name="title" class="form-control" placeholder="Titre"  value="<?= (!empty($_POST['title']) && !isset($validate)) ? $_POST['title'] :'' ; ?>">
-	<?= (isset($error['titleEmpty'])) ? '<div class="text-danger">' . $error['titleEmpty'] . '</div>' :'';?>
-</div>
-<div class="form-group">
-	<?= (isset($error['contentEmpty'])) ? '<div class="text-danger">' . $error['contentEmpty'] . '</div>' :'';?>
-	<textarea name="content" id="contentArticle" class="form-control content-article" cols="30" rows="10"><?= (!empty($_POST['content']) && !isset($validate)) ? $_POST['content'] :'' ; ?></textarea>
-</div>

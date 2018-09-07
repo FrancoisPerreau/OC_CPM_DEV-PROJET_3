@@ -120,19 +120,141 @@ class BackController
 		$this->_view->renderBack('adminDelete', $data);
 	}
 
-
-	public function adminEdit($action, $id)
+	/**
+	 * Controller de la vue adminEdit
+	 */
+	public function adminEdit($action, $id, $subject = null)
 	{
-		$data = [];
+		$data = [];	
 
+		extract($_POST);	
+
+		// Controle de la vue de base ---------------------
 		if ($action === 'editArticle')
 		{
 			$data['article'] = $this->_articleDAO->getArticle($id);
 		}
 
+
 		if ($action === 'editDraft')
 		{
 			$data['draft'] = $this->_draftDAO->getDraft($id);
+		}
+		
+
+		// Controle de la Mise à jour d'article -----------
+		if ($action === 'updateArticle' && $subject === 'article')
+		{
+			//extract($_POST);
+
+			$data['article'] = $article = $this->_articleDAO->getArticle($id);
+			$chapter = $article->getChapter();
+			$idArt = $article->getId();
+			$status = 'publish';
+
+			if (!empty($imageName = $article->getImageName()))
+			{
+				$imageExist = true;
+			}
+			
+			$data['error']=Control::controlAddArticleOrDraft($chapter, $title, $content, $status, $imageExist);
+
+			if(!$data['error'])
+			{				
+				if (!empty($_FILES['imageArticle']['name'])) {
+					$newImageName = ImageModel::savImage($_FILES['imageArticle']);
+				}
+				else
+				{
+					$newImageName = $article->getImageName();
+				}
+
+				$this->_articleDAO->updateArticle($idArt, $title, $newImageName, $content);	
+
+				$data['validate'] = 'Mise à jour du chapitre réussie';
+			}			
+		}
+
+		// Controle de la Mise à jour de brouillon  --------
+		if (isset($draft) && $action === 'updateDraft' && $subject === 'draft')
+		{		
+			var_dump($_POST);	
+			
+
+			$data['draft'] = $draft = $this->_draftDAO->getDraft($id);
+			$chapter = $draft->getChapter();
+			$idDraft = $draft->getId();
+			$status = 'draft';
+			// $imageExist = false;
+
+			var_dump($chapter);
+			var_dump($draft->getImageName());
+
+
+			if (!empty($imageName = $draft->getImageName()))
+			{
+				$imageExist = true;
+			}
+
+			$data['error']=Control::controlAddArticleOrDraft($chapter, $title, $content, $status, $imageExis);
+			var_dump($$data['error']);
+
+			if(!$data['error'])
+			{				
+				if (!empty($_FILES['imageArticle']['name']))
+				{
+					$newImageName = ImageModel::savImage($_FILES['imageArticle']);
+				}
+				elseif ($imageExist)
+				{
+					$newImageName = $draft->getImageName();
+				}
+
+				
+				$this->_draftDAO->updateDraft($idDraft, $title, $newImageName, $content);	
+
+				$data['validate'] = 'Mise à jour du Brouillon réussie';
+			}
+		}
+
+		// Controle de la publication d'un brouillon  --------
+		if (isset($publish) && $action === 'updateDraft' && $subject === 'draft')
+		{
+			$data['draft'] = $draft = $this->_draftDAO->getDraft($id);
+			$chapter = $draft->getChapter();
+			$status = 'publish';
+
+			if (!empty($imageName = $draft->getImageName()))
+			{
+				$imageExist = true;
+			}
+
+			$data['error']=Control::controlAddArticleOrDraft($chapter, $title, $content, $status, $imageExist);
+
+			if ($this->_articleDAO->articleDataExists('chapter', (int) $chapter))
+			{
+				$data['error']['chapterExistes'] = 'Ce numéro de chapitre existe déjà';
+			}
+
+			if(!$data['error'])
+			{
+				if (!empty($_FILES['imageArticle']['name']))
+				{
+					$newImageName = ImageModel::savImage($_FILES['imageArticle']);
+				}
+				elseif ($imageExist)
+				{
+					$newImageName = $draft->getImageName();
+				}				
+
+				$this->_articleDAO->addArticle($chapter, $title, $newImageName, $content);	
+
+				unset($chapter);
+				unset($title);
+				unset($content);
+
+				$data['validate'] = 'Publication du chapitre réussie';
+			}
 		}
 
 		$this->_view->renderBack('adminEdit', $data);

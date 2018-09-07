@@ -7,13 +7,11 @@ class Control
 	// MÉTHODES
 	// =============================
 	
-	static function controlAddArticleOrDraft($chapter, $title, $content, $status)
+	static function controlAddArticleOrDraft($chapter, $title, $content, $status, $imageExist = null)
 	{	
 		// Vérification pour publish --------------------
 		if (isset($status) && $status ==='publish')
 		{
-			var_dump('je suis dans la Vérif PUBLISH');			
-
 			$error = [];
 
 			$chapter = (int) $chapter;
@@ -49,7 +47,10 @@ class Control
 			}
 			else
 			{
-				$error['imageEmpty'] = 'Vous devez poster une image';
+				if (!$imageExist) {
+					$error['imageEmpty'] = 'Vous devez poster une image';
+				}
+				
 			}
 
 

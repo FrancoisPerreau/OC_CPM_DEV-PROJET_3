@@ -114,15 +114,44 @@ class Router
 				}	
 
 				// ADMIN-EDIT ------------------------
-				elseif ($_GET['route'] === 'edit')
+				elseif ($_GET['route'] === 'adminEdit')
 				{
-					if (isset($_GET['action']) && $_GET['action'] === 'editArticle')
+					if (isset($_GET['action']) && ($_GET['action'] === 'editArticle' || $_GET['action'] === 'updateArticle'))
 					{
-						$this->_backController->adminEdit(str_secur($_GET['action']), str_secur($_GET['idArt']));
+						if (isset($_GET['subject']) && $_GET['subject'] === 'article')
+						{
+							if (isset($_GET['idArt']) && $_GET['idArt'] === 'idArt')
+							{
+								$this->_backController->adminEdit(str_secur($_GET['action']), str_secur($_GET['idArt']), str_secur($_GET['subject']));
+							}
+							elseif (isset($_GET['idToUpdate'])) {
+								$this->_backController->adminEdit(str_secur($_GET['action']), str_secur($_GET['idToUpdate']), str_secur($_GET['subject']));
+							}							
+						}
+						else
+						{
+							$this->_backController->adminEdit(str_secur($_GET['action']), str_secur($_GET['idArt']));
+						}
+
+						
 					}
-					elseif (isset($_GET['action']) && $_GET['action'] === 'editDraft')
+					elseif (isset($_GET['action']) && $_GET['action'] === 'editDraft' || $_GET['action'] === 'updateDraft')
 					{
-						$this->_backController->adminEdit(str_secur($_GET['action']), str_secur($_GET['idDraft']));
+						if (isset($_GET['subject']) && $_GET['subject'] === 'draft')
+						{
+							if (isset($_GET['idDraft']) && $_GET['idDraft'] === 'idDraft')
+							{
+								$this->_backController->adminEdit(str_secur($_GET['action']), str_secur($_GET['idDraft']), str_secur($_GET['subject']));
+							}
+							elseif (isset($_GET['idToUpdate']))
+							{
+								$this->_backController->adminEdit(str_secur($_GET['action']), str_secur($_GET['idToUpdate']), str_secur($_GET['subject']));
+							}
+						}
+						else
+						{
+							$this->_backController->adminEdit(str_secur($_GET['action']), str_secur($_GET['idDraft']));
+						}
 					}
 
 				}

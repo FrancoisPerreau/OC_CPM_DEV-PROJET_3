@@ -57,6 +57,27 @@ class ArticleDAO extends DAO
 	}
 
 
+	/**
+	 * Mise à jour d'un article en base de données
+	 * @param [str] $title 
+	 * @param [str] $newImageName
+	 * @param [str] $content
+	 */
+	public function updateArticle($idArt, $title, $newImageName, $content)
+	{
+		$sql = 'UPDATE articles SET title = :title, content = :content, image_name = :image_name WHERE id = :id';
+
+		$parameters = [
+			'id' => $idArt,
+			'title' => $title,
+			'content' => $content,
+			'image_name' => $newImageName
+		];
+
+		$this->sql($sql, $parameters);
+	}
+
+
 
 	/**
 	 * Retourne la requette pour la liste des articles classés par chapitre triée en ordre decroissant

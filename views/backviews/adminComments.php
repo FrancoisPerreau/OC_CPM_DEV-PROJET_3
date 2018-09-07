@@ -23,11 +23,11 @@ $title = $this->getPageTitle();
 								<p class="text-muted comment-list">
 									<span class="badge badge-warning reported"><?= str_secur($reportedComment->getReported()); ?></span> Signalement(s)
 								</p>								
-								<a href="../public/index.php?route=adminHome&amp;action=moderate&amp;idComment=<?= str_secur($reportedComment->getId()); ?>" class="btn btn-outline-info btn-sm">en attente</a>
+								<a href="../public/index.php?route=adminComments&amp;action=moderate&amp;idComment=<?= str_secur($reportedComment->getId()); ?>" class="btn btn-outline-info btn-sm">en attente</a>
 							</li>
 
 							<li class="list-group-item">
-								<p class="comment-list text-muted text-uppercase"><?= $reportedComment->getArticleChapter(); ?></p>
+								<p class="comment-list text-muted text-uppercase">Chapitre <?= $reportedComment->getArticleChapter(); ?></p>
 								<p class="comment-list"><strong><?= str_secur($reportedComment->getPseudo()); ?></strong> - ajouté le : <?= str_secur($reportedComment->getDateAdded()); ?><br>
 									<?= str_secur($reportedComment->getContent()); ?></p>
 								</li>					
@@ -46,9 +46,9 @@ $title = $this->getPageTitle();
 							<ul class="list-group list-group-flush comment_container">
 								<li class="list-group-item list-group-item-secondary list-groupe-title">
 									<p class="text-muted comment-list">
-										<span class="badge badge-warning reported"><?= str_secur($reportedComment->getReported()); ?></span> Signalement(s)
+										<span class="badge badge-warning reported">Chapitre <?= str_secur($reportedComment->getReported()); ?></span> Signalement(s)
 									</p>
-									<a href="../public/index.php?route=adminHome&amp;action=moderate&amp;idComment=<?= str_secur($reportedComment->getId()); ?>" class="btn btn-outline-danger btn-sm">modéré</a>
+									<a href="../public/index.php?route=adminComments&amp;action=moderate&amp;idComment=<?= str_secur($reportedComment->getId()); ?>" class="btn btn-outline-danger btn-sm">annuler</a>
 								</li>
 
 								<li class="list-group-item">

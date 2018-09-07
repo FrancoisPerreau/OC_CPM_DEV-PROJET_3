@@ -18,7 +18,7 @@ $this->_title = $article->getTitle();
 		<h2 class="sigle-title"><?= str_secur($article->getTitle());?></h2>
 		<p class="text-muted">Publié le <?= str_secur($article->getDateAdded());?></p>
 		
-		<p class="article-content"><?= nl2br(str_secur($article->getContent()));?></p>			
+		<p class="article-content"><?= nl2br($article->getContent());?></p>			
 	</div>
 </section>
 

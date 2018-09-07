@@ -33,6 +33,27 @@ class DraftDAO extends DAO
 
 
 	/**
+	 * Mise à jour d'un brouillon en base de données
+	 * @param [str] $title 
+	 * @param [str] $newImageName
+	 * @param [str] $content
+	 */
+	public function updateDraft($idDraft, $title, $newImageName, $content)
+	{
+		$sql = 'UPDATE drafts SET title = :title, content = :content, image_name = :image_name WHERE id = :id';
+
+		$parameters = [
+			'id' => $idDraft,
+			'title' => $title,
+			'content' => $content,
+			'image_name' => $newImageName
+		];
+
+		$this->sql($sql, $parameters);
+	}
+
+
+	/**
 	 * Retourne la requette pour la liste des brouillons classés par chapitre triée en ordre decroissant
 	 * @return array
 	 */

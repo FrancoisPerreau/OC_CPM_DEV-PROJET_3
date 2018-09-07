@@ -26,7 +26,7 @@ $title = $this->getPageTitle();
   <h2 class="text-center">Les dérniers chapitres</h2>
   <div class="row">
     <?php foreach ($articles as $article):?>
-      <div class="col-lg-4">
+      <div class="col-lg-4 block-resum">
         <div class="resum-article">
           <div class="img-resum-article" style="background-image: url(<?= URI_IMAGE_CHAPTER . $article->getImageName();?>);">
           </div>
