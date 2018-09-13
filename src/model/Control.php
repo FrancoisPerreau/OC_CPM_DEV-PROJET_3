@@ -6,7 +6,8 @@ class Control
 
 	// MÉTHODES
 	// =============================
-	
+
+	// ADD CHAPITRE OU BROUILLON
 	static function controlAddArticleOrDraft($chapter, $title, $content, $status, $imageExist = null)
 	{	
 		// Vérification pour publish --------------------
@@ -49,8 +50,7 @@ class Control
 			{
 				if (!$imageExist) {
 					$error['imageEmpty'] = 'Vous devez poster une image';
-				}
-				
+				}				
 			}
 
 
@@ -72,8 +72,6 @@ class Control
 		// Vérification pour draft
 		if (isset($status) && $status === 'draft')
 		{
-			//var_dump('je suis dans la Vérif DRAFT');
-
 			$error = [];
 
 			$chapter = (int) $chapter;
@@ -86,6 +84,59 @@ class Control
 			{
 				$error['chapterInt'] = 'Vous devez saisir un numéro';
 			}
+		}
+
+		return $error;
+	}
+
+	
+
+	// PROFIL
+	static function controlProfilPseudo($pseudo)
+	{
+		$error = [];
+
+		if (empty($pseudo))
+		{
+			$error['pseudo'] = 'Vous devez saisir un pseudo';
+		}
+		return $error;
+	}
+
+	static function controlProfilMail($mail)
+	{
+		$error = [];
+		if (empty($mail))
+		{
+			$error['mail'] = 'Vous devez saisir une adresse e-mail';
+		}
+		elseif (!filter_var($mail, FILTER_VALIDATE_EMAIL))
+		{
+			$error['mail'] = 'Vous devez saisir une adresse e-mail valide';
+		}
+		return $error;
+	}
+
+	static function controlProfilPassword($password, $passwordConfirm)
+	{
+		$error = [];
+
+		if (empty($password))
+		{
+			$error['password'] = 'Vous devez saisir un mot de passe';
+		}
+		elseif (strlen($password) < 8)
+		{
+			$error['password'] = 'Le mot de passe doit faire au moins 8 caractères';
+		}
+
+		if (empty($passwordConfirm))
+		{
+			$error['passwordConfirm'] = 'Vous devez saisir la confirmation du mot de passe';
+		}
+		elseif ($password != $passwordConfirm)
+		{
+			$error['passwordConfirm'] = 'La confirmation du mot de passe est différente du mot de passe';
 		}
 
 		return $error;

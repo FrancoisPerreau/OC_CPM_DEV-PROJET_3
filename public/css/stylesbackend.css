@@ -11,6 +11,11 @@
 }
 
 
+.container-forget h3 {
+	margin-bottom: 50px;
+}
+
+
 /*========== ADMIN HOME ==========*/
 /*================================*/
 .admin-top {
@@ -133,5 +138,17 @@
 
 .container-admin-delete {
 	padding-top: 75px;
+}
+
+
+
+/*========= ADMIN PROFIL =========*/
+/*================================*/
+.container-profil {
+	margin-bottom: 50px;
+}
+
+.container-profil p {
+	margin: 0;
 }
 

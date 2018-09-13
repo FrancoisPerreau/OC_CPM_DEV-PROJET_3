@@ -76,6 +76,10 @@ class Router
 					{
 						$this->_backController->connection(str_secur($_GET['action']));
 					}
+					elseif (isset($_GET['action']) && $_GET['action'] === 'forgetPassword')
+					{
+						$this->_backController->connection(str_secur($_GET['action']));
+					}
 					else
 					{
 						$this->_backController->connection();
@@ -180,9 +184,14 @@ class Router
 				// ADMIN-PROFIL ------------------------
 				elseif ($_GET['route'] === 'adminProfil')
 				{
-					
-					$this->_backController->adminProfil();
-
+					if (isset($_GET['action']) && ($_GET['action'] === 'updatePseudo' || $_GET['action'] === 'updateMail' || $_GET['action'] === 'updatePass'))
+					{
+						$this->_backController->adminProfil(str_secur($_GET['action']));
+					}
+					else
+					{
+						$this->_backController->adminProfil();
+					}
 				}		
 
 

@@ -2,12 +2,15 @@
 namespace cyannlab\src\model;
 
 use cyannlab\src\DAO\AdminDAO;
+use cyannlab\src\DAO\UserDAO;
+use cyannlab\src\model\UserModel;
 
 class AdminModel
 {
 	// ATTRIBUTS
 	// ===================================
 	private $_adminDAO;
+	private $_userDAO;
 	private $_user;
 
 
@@ -17,6 +20,7 @@ class AdminModel
 	public function __construct()
 	{
 		$this->_adminDAO = new AdminDAO();
+		$this->_userDAO = new UserDAO();
 	}
 
 
@@ -36,7 +40,7 @@ class AdminModel
 
 		if($this->accountExists($name, $password))
 		{
-			$_SESSION['id'] = $this->_user['id'];
+			$_SESSION['id'] = $this->_user->getId();
 
 			header('Location: ../public/index.php?route=adminHome');
 		}
@@ -67,25 +71,28 @@ class AdminModel
 				$params["secure"], $params["httponly"]
 			);
 		}
-
 		// Finalement, on détruit la session.
 		session_destroy();
-
-		// On redirige l'utilisateur
-		// header('Location: ../public/index.php');
 	}
 
 
 	/**
-	 * Vérifie que le nom et le mot de passe passés sont 
+	 * Vérifie que le nom et le mot de passe passés 
 	 * @param  $name
 	 * @param  $password
 	 * @return bool
 	 */
 	public function accountExists($name, $password)
 	{
-		$this->_user = $this->_adminDAO->getUserForConnection();
+		$this->_user = $this->_userDAO->getUser();
 
-		return  $name === $this->_user['name'] && $password === $this->_user['password'];		
+		if ($name === $this->_user->getPseudo() &&  $this->_userDAO->passwordOk($password))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 }

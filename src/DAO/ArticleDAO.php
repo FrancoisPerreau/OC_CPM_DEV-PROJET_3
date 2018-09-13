@@ -10,30 +10,6 @@ class ArticleDAO extends DAO
 	// ===================================
 
 	/**
-	 * Ajoute un brouillon en base de données
-	 * @param [int] $chapter
-	 * @param [str] $title 
-	 * @param [str] $newImageName
-	 * @param [str] $content
-	 */
-	// public function addDraft($chapter, $title, $newImageName, $content)
-	// {
-	// 	$sql = 'INSERT INTO drafts(chapter, title, content, author, date_added, image_name)
-	// 	VALUES(:chapter, :title, :content, :author, NOW(), :image_name)';
-
-	// 	$parameters = [
-	// 		'chapter' => $chapter,
-	// 		'title' => $title,
-	// 		'content' => $content,
-	// 		'author' => AUTHOR,
-	// 		'image_name' => $newImageName
-	// 	];
-
-	// 	$this->sql($sql, $parameters);
-	// }
-
-
-	/**
 	 * Ajoute un article en base de données
 	 * @param [int] $chapter
 	 * @param [str] $title 

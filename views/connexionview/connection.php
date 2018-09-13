@@ -20,7 +20,7 @@
 
 			<button class="btn btn-outline-info btn-block" type="submit">Connexion</button>
 
-			<p><a class="text-muted" href="">Mot de passe oublié ?</a></p>
+			<p><a class="text-muted" href="../public/index.php?route=connection&amp;action=forgetPassword">Mot de passe oublié ?</a></p>
 
 		</form>
 

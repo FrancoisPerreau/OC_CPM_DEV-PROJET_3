@@ -9,6 +9,7 @@ use cyannlab\src\model\AdminModel;
 use cyannlab\src\DAO\ArticleDAO;
 use cyannlab\src\DAO\CommentDAO;
 use cyannlab\src\DAO\DraftDAO;
+use cyannlab\src\DAO\UserDAO;
 use cyannlab\src\model\View;
 
 class BackController
@@ -19,6 +20,7 @@ class BackController
 	private $_articleDAO;
 	private $_commentDAO;
 	private $_draftDAO;
+	private $_userDAO;
 	private $_view;
 
 
@@ -30,6 +32,7 @@ class BackController
 		$this->_articleDAO = new ArticleDAO();
 		$this->_commentDAO = new CommentDAO();
 		$this->_draftDAO = new DraftDAO();
+		$this->_userDAO = new UserDAO();
 		$this->_view = new View();
 	}
 
@@ -48,8 +51,46 @@ class BackController
 		if ($action === 'attemptConnection')
 		{
 			$data['error'] = $this->_adminModel->connectAdmin(str_secur($_POST['name']), str_secur($_POST['password']));
-		}		
-		$this->_view->renderConnexion('connection', $data);		
+
+			$this->_view->renderConnexion('connection', $data);	
+		}
+		elseif ($action === 'forgetPassword')
+		{
+			
+			extract($_POST);
+
+			if (empty($pseudo) || empty($email))
+			{
+				$data['errorForget'] = 'les deux champs sont obligatoirs';
+			}
+			elseif (!$this->_userDAO->pseudoOk($pseudo) || !$this->_userDAO->mailOk($email))
+			{
+				$data['errorForget'] = 'Identifiants érronés';
+			}
+
+			if (empty($data['errorForget']))
+			{
+				$newPassword = $this->_userDAO->generatePassword();
+
+				//var_dump($newPassword);
+
+				$this->_userDAO->updatePassword($newPassword);
+				
+				$user = $this->_userDAO->getUser();
+				$email = $user->getMail();
+				mailHtmlForgetPassword($email, $newPassword);
+
+				$data['validate'] = 'Un nouveau mot de passe vous été envoyé';		
+			}			
+
+			$this->_view->renderConnexion('connectionForget', $data);
+		}
+		else
+		{
+			$this->_view->renderConnexion('connection', $data);
+		}
+
+
 	}
 
 	public function adminDeconnection()
@@ -161,7 +202,8 @@ class BackController
 
 			if(!$data['error'])
 			{				
-				if (!empty($_FILES['imageArticle']['name'])) {
+				if (!empty($_FILES['imageArticle']['name']))
+				{
 					$newImageName = ImageModel::savImage($_FILES['imageArticle']);
 				}
 				else
@@ -178,27 +220,18 @@ class BackController
 		// Controle de la Mise à jour de brouillon  --------
 		if (isset($draft) && $action === 'updateDraft' && $subject === 'draft')
 		{		
-			var_dump($_POST);	
-			
-
 			$data['draft'] = $draft = $this->_draftDAO->getDraft($id);
 			$chapter = $draft->getChapter();
 			$idDraft = $draft->getId();
 			$status = 'draft';
-			// $imageExist = false;
-
-			var_dump($chapter);
-			var_dump($draft->getImageName());
-
-
+			
 			if (!empty($imageName = $draft->getImageName()))
 			{
 				$imageExist = true;
 			}
 
 			$data['error']=Control::controlAddArticleOrDraft($chapter, $title, $content, $status, $imageExis);
-			var_dump($$data['error']);
-
+			
 			if(!$data['error'])
 			{				
 				if (!empty($_FILES['imageArticle']['name']))
@@ -258,6 +291,7 @@ class BackController
 		}
 
 		$this->_view->renderBack('adminEdit', $data);
+
 	}
 
 
@@ -322,24 +356,18 @@ class BackController
 		{			
 			$draft = 'draft';
 
-			$data['error']=Control::controlAddArticleOrDraft($chapter, $title, $content, $draft);
+			$data['error'] = Control::controlAddArticleOrDraft($chapter, $title, $content, $draft);
 			
 			if ($this->_articleDAO->articleDataExists('chapter', (int) $chapter))
 			{
 				$data['error']['chapterExistes'] = 'Ce numéro de chapitre existe déjà';
-			}	
-
-			// var_dump($data['error']);		
+			}
 
 			if(!$data['error'])
 			{
 				$newImageName = ImageModel::savImage($_FILES['imageArticle']);				
 
-				$this->_draftDAO->addDraft($chapter, $title, $newImageName, $content);	
-
-				// unset($chapter);
-				// unset($title);
-				// unset($content);
+				$this->_draftDAO->addDraft($chapter, $title, $newImageName, $content);
 
 				$data['validate'] = 'Sauvegarde du brouillon réussie';
 			}
@@ -349,9 +377,50 @@ class BackController
 	}
 
 
-	public function adminProfil()
+	public function adminProfil($action = null)
 	{
-		$this->_view->renderBack('adminProfil');
+		
+		$data['error'] = [];
+
+		extract($_POST);
+
+		// Contrôle Formulaires
+		if (isset($action) && str_secur($action) === 'updatePseudo')
+		{
+			$data['error'] = Control::controlProfilPseudo($pseudo);
+
+			if (!$data['error'])
+			{
+				$this->_userDAO->updatePseudo($pseudo);
+				$data['validate'] = 'Votre pseudo a été modifié';
+			}
+		}
+
+		elseif (isset($action) && str_secur($action) === 'updateMail')
+		{
+			$data['error'] = Control::controlProfilMail($email);
+
+			if (!$data['error'])
+			{
+				$this->_userDAO->updateMail($email);
+				$data['validate'] = 'Votre e-mail a été modifié';
+			}
+		}
+
+		elseif (isset($action) && str_secur($action) === 'updatePass')
+		{
+			$data['error'] = Control::controlProfilPassword($password, $passwordConfirm);
+
+			if (!$data['error'])
+			{
+				$this->_userDAO->updatePassword($password);
+				$data['validate'] = 'Votre mot de passe a été modifié';
+			}
+		}
+
+		$data['user'] = $this->_userDAO->getUser();
+
+		$this->_view->renderBack('adminProfil', $data);
 	}
 
 

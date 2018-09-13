@@ -57,33 +57,40 @@ class FrontController
 	 */
 	public function article($idArt, $action = null, $idComment = null, $nbReporte = null)
 	{
-		$data =[];
+		if ($this->_articleDAO->articleDataExists('id', $idArt))
+		{			
+			$data =[];
 
-		if ($action === 'addComment')
-		{
-			$this->_commentDAO->addComment($_POST, $idArt);	
-			header('location: ../public/index.php?route=article&idArt='. $idArt . '#comments_post');		
+			if ($action === 'addComment')
+			{
+				$this->_commentDAO->addComment($_POST, $idArt);	
+				header('location: ../public/index.php?route=article&idArt='. $idArt . '#comments_post');		
+			}
+
+			if ($action === 'reported')
+			{				
+				$this->_commentDAO->reportedComment($idComment, $idArt, $nbReporte);
+				header('location: ../public/index.php?route=article&idArt='. $idArt . '#comments_post');
+			}
+
+			$data['article'] = $this->_articleDAO->getArticle($idArt);
+			$data['comments'] = $this->_commentDAO->getCommentsFromArticle($idArt);
+
+			$this->_view->renderFront('single', $data);
+
+			if (isset($_SESSION['errorPseudo']))
+			{
+				unset($_SESSION['errorPseudo']);
+			}
+
+			if (isset($_SESSION['errorContent']))
+			{
+				unset($_SESSION['errorContent']);
+			}
 		}
-
-		if ($action === 'reported')
-		{				
-			$this->_commentDAO->reportedComment($idComment, $idArt, $nbReporte);
-			header('location: ../public/index.php?route=article&idArt='. $idArt . '#comments_post');
-		}
-
-		$data['article'] = $this->_articleDAO->getArticle($idArt);
-		$data['comments'] = $this->_commentDAO->getCommentsFromArticle($idArt);
-
-		$this->_view->renderFront('single', $data);
-
-		if (isset($_SESSION['errorPseudo']))
+		else
 		{
-			unset($_SESSION['errorPseudo']);
-		}
-		
-		if (isset($_SESSION['errorContent']))
-		{
-			unset($_SESSION['errorContent']);
+			echo 'cet article n\'existe pas.';
 		}
 	}
 
