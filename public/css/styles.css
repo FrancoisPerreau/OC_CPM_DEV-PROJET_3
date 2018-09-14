@@ -104,9 +104,16 @@ section {
 	margin: -15px -15px 30px -15px;
 	height: 200px;
 	
-	background-repeat: no-repeat;
+	/*background-repeat: no-repeat;
 	background-position: center;
-	background-size: cover ;
+	background-size: cover ;*/
+}
+
+.img-resum-article img {
+	height: 100%;
+	width: 100%;
+	
+	object-fit: cover;
 }
 
 .resum-btn {

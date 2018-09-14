@@ -8,7 +8,8 @@ $title = $this->getPageTitle();
 		<?php foreach ($articles as $article):?>
 			<div class="col-lg-4 block-resum">
 				<div class="resum-article">
-					<div class="img-resum-article" style="background-image: url(<?= URI_IMAGE_CHAPTER . $article->getImageName();?>);">
+					<div class="img-resum-article">
+						<img src="<?= URI_IMAGE_CHAPTER . $article->getImageName();?>" alt="<?= $article->getImageAlt();?>">
 					</div>
 					<h5 class="text-muted text-uppercase">Chapitre <?= str_secur($article->getChapter());?></h5>
 					<h3><?= str_secur($article->getTitle());?></h3>

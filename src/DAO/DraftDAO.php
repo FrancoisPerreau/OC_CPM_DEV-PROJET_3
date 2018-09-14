@@ -15,17 +15,18 @@ class DraftDAO extends DAO
 	 * @param [str] $newImageName
 	 * @param [str] $content
 	 */
-	public function addDraft($chapter, $title, $newImageName, $content)
+	public function addDraft($chapter, $title, $newImageName, $alt, $content)
 	{
-		$sql = 'INSERT INTO drafts(chapter, title, content, author, date_added, image_name)
-		VALUES(:chapter, :title, :content, :author, NOW(), :image_name)';
+		$sql = 'INSERT INTO drafts(chapter, title, content, author, date_added, image_name, image_alt)
+		VALUES(:chapter, :title, :content, :author, NOW(), :image_name, :image_alt)';
 
 		$parameters = [
 			'chapter' => $chapter,
 			'title' => $title,
 			'content' => $content,
 			'author' => AUTHOR,
-			'image_name' => $newImageName
+			'image_name' => $newImageName,
+			'image_alt' => $alt
 		];
 
 		$this->sql($sql, $parameters);
@@ -38,15 +39,16 @@ class DraftDAO extends DAO
 	 * @param [str] $newImageName
 	 * @param [str] $content
 	 */
-	public function updateDraft($idDraft, $title, $newImageName, $content)
+	public function updateDraft($idDraft, $title, $newImageName, $alt, $content)
 	{
-		$sql = 'UPDATE drafts SET title = :title, content = :content, image_name = :image_name WHERE id = :id';
+		$sql = 'UPDATE drafts SET title = :title, content = :content, image_name = :image_name, image_alt = :image_alt WHERE id = :id';
 
 		$parameters = [
 			'id' => $idDraft,
 			'title' => $title,
 			'content' => $content,
-			'image_name' => $newImageName
+			'image_name' => $newImageName,
+			'image_alt' => $alt
 		];
 
 		$this->sql($sql, $parameters);
@@ -59,7 +61,7 @@ class DraftDAO extends DAO
 	 */
 	public function getDrafts()
 	{
-		$sql = 'SELECT id, chapter, title, content, author, DATE_FORMAT(date_added, "%d/%m/%Y à %Hh%i") AS date_added_fr, image_name FROM drafts ORDER BY chapter';
+		$sql = 'SELECT id, chapter, title, content, author, DATE_FORMAT(date_added, "%d/%m/%Y à %Hh%i") AS date_added_fr, image_name, image_alt FROM drafts ORDER BY chapter';
 		$data = $this->sql($sql);
 
 		$drafts = [];
@@ -80,7 +82,7 @@ class DraftDAO extends DAO
 	 */
 	public function getDraft($idDraft)
 	{
-		$sql = 'SELECT id, chapter, title, content, author, DATE_FORMAT(date_added, "%d/%m/%Y à %Hh%i") AS date_added_fr, image_name FROM drafts WHERE id = ?';
+		$sql = 'SELECT id, chapter, title, content, author, DATE_FORMAT(date_added, "%d/%m/%Y à %Hh%i") AS date_added_fr, image_name, image_alt FROM drafts WHERE id = ?';
 		$data = $this->sql($sql, [$idDraft]);		
 
 		$draft = $this->buildDraft($data->fetch());
@@ -96,7 +98,7 @@ class DraftDAO extends DAO
 	 */
 	public function getDraftByChapter($chapterDraft)
 	{
-		$sql = 'SELECT id, chapter, title, content, author, DATE_FORMAT(date_added, "%d/%m/%Y à %Hh%i") AS date_added_fr, image_name FROM drafts WHERE chapter = ?';
+		$sql = 'SELECT id, chapter, title, content, author, DATE_FORMAT(date_added, "%d/%m/%Y à %Hh%i") AS date_added_fr, image_name, image_alt FROM drafts WHERE chapter = ?';
 		$data = $this->sql($sql, [$chapterDraft]);		
 
 		$draft = $this->buildDraft($data->fetch());
@@ -150,6 +152,7 @@ class DraftDAO extends DAO
 		$draft->setAuthor($row['author']);
 		$draft->setDateAdded($row['date_added_fr']);
 		$draft->setImageName($row['image_name']);
+		$draft->setImageAlt($row['image_alt']);
 
 		return $draft;
 	}

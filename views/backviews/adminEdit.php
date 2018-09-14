@@ -56,6 +56,10 @@ elseif (isset($draft))
 				</div>
 
 				<div class="form-group">
+					<input type="text" id="alt" name="alt" class="form-control" placeholder="Texte alternatif de l'image"  value="<?= (!empty($dadaToUpdate->getImageAlt()) && !isset($validate)) ? $dadaToUpdate->getImageAlt() :'' ; ?>">
+				</div>
+
+				<div class="form-group">
 					<input type="title" id="title" name="title" class="form-control" placeholder="Titre"  value="<?= (!empty($dadaToUpdate->getTitle()) && !isset($validate)) ? $dadaToUpdate->getTitle() :'' ; ?>">
 					<?= (isset($error['titleEmpty'])) ? '<div class="text-danger">' . $error['titleEmpty'] . '</div>' :'';?>
 				</div>

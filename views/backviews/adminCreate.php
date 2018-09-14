@@ -31,15 +31,22 @@ $title = $this->getPageTitle();
 					<?= (isset($error['imageSize'])) ? '<div class="text-danger">' . $error['imageSize'] . '</div>' :'';?>	
 				</div>
 			</div>
+
+			<div class="form-group">
+				<input type="text" id="alt" name="alt" class="form-control" placeholder="Texte alternatif de l'image"  value="<?= (!empty($_POST['alt']) && !isset($validate)) ? $_POST['alt'] :'' ; ?>">
+			</div>
 			
 			<div class="form-group">
-				<input type="title" id="title" name="title" class="form-control" placeholder="Titre"  value="<?= (!empty($_POST['title']) && !isset($validate)) ? $_POST['title'] :'' ; ?>">
+				<input type="text" id="title" name="title" class="form-control" placeholder="Titre"  value="<?= (!empty($_POST['title']) && !isset($validate)) ? $_POST['title'] :'' ; ?>">
 				<?= (isset($error['titleEmpty'])) ? '<div class="text-danger">' . $error['titleEmpty'] . '</div>' :'';?>
 			</div>
+			
+
 			<div class="form-group">
 				<?= (isset($error['contentEmpty'])) ? '<div class="text-danger">' . $error['contentEmpty'] . '</div>' :'';?>
 				<textarea name="content" id="contentArticle" class="form-control content-article" cols="30" rows="10"><?= (!empty($_POST['content']) && !isset($validate)) ? $_POST['content'] :'' ; ?></textarea>
 			</div>
+
 			<div class="form-row">
 				<div class="col-md-6" >
 					<button type="submit" name="draft" class="btn btn-secondary btn-block">sauvegarder</button>

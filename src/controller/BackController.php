@@ -197,6 +197,10 @@ class BackController
 			{
 				$imageExist = true;
 			}
+			else
+			{
+				$imageExist = false;
+			}
 			
 			$data['error']=Control::controlAddArticleOrDraft($chapter, $title, $content, $status, $imageExist);
 
@@ -212,7 +216,7 @@ class BackController
 					$newImageName = $article->getImageName();
 				}
 
-				$this->_articleDAO->updateArticle($idArt, $title, $newImageName, $content);	
+				$this->_articleDAO->updateArticle($idArt, $title, $newImageName, $alt, $content);	
 
 				$data['validate'] = 'Mise à jour du chapitre réussie';
 			}			
@@ -230,6 +234,10 @@ class BackController
 			{
 				$imageExist = true;
 			}
+			else
+			{
+				$imageExist = false;
+			}
 
 			$data['error']=Control::controlAddArticleOrDraft($chapter, $title, $content, $status, $imageExist);
 			
@@ -244,9 +252,8 @@ class BackController
 				{
 					$newImageName = $draft->getImageName();
 				}
-
 				
-				$this->_draftDAO->updateDraft($idDraft, $title, $newImageName, $content);	
+				$this->_draftDAO->updateDraft($idDraft, $title, $newImageName, $alt, $content);	
 
 				$data['validate'] = 'Mise à jour du Brouillon réussie';
 			}
@@ -342,7 +349,7 @@ class BackController
 			{
 				$newImageName = ImageModel::savImage($_FILES['imageArticle']);				
 
-				$this->_articleDAO->addArticle($chapter, $title, $newImageName, $content);	
+				$this->_articleDAO->addArticle($chapter, $title, $newImageName, $alt, $content);	
 
 				unset($chapter);
 				unset($title);
@@ -369,7 +376,7 @@ class BackController
 			{
 				$newImageName = ImageModel::savImage($_FILES['imageArticle']);				
 
-				$this->_draftDAO->addDraft($chapter, $title, $newImageName, $content);
+				$this->_draftDAO->addDraft($chapter, $title, $newImageName, $alt, $content);
 
 				$data['validate'] = 'Sauvegarde du brouillon réussie';
 			}

@@ -16,17 +16,18 @@ class ArticleDAO extends DAO
 	 * @param [str] $newImageName
 	 * @param [str] $content
 	 */
-	public function addArticle($chapter, $title, $newImageName, $content)
+	public function addArticle($chapter, $title, $newImageName, $alt, $content)
 	{
-		$sql = 'INSERT INTO articles(chapter, title, content, author, date_added, image_name)
-		VALUES(:chapter, :title, :content, :author, NOW(), :image_name)';
+		$sql = 'INSERT INTO articles(chapter, title, content, author, date_added, image_name, image_alt)
+		VALUES(:chapter, :title, :content, :author, NOW(), :image_name, :image_alt)';
 
 		$parameters = [
 			'chapter' => $chapter,
 			'title' => $title,
 			'content' => $content,
 			'author' => AUTHOR,
-			'image_name' => $newImageName
+			'image_name' => $newImageName,
+			'image_alt' => $alt
 		];
 
 		$this->sql($sql, $parameters);
@@ -39,15 +40,16 @@ class ArticleDAO extends DAO
 	 * @param [str] $newImageName
 	 * @param [str] $content
 	 */
-	public function updateArticle($idArt, $title, $newImageName, $content)
+	public function updateArticle($idArt, $title, $newImageName, $alt, $content)
 	{
-		$sql = 'UPDATE articles SET title = :title, content = :content, image_name = :image_name WHERE id = :id';
+		$sql = 'UPDATE articles SET title = :title, content = :content, image_name = :image_name, image_alt = :image_alt WHERE id = :id';
 
 		$parameters = [
 			'id' => $idArt,
 			'title' => $title,
 			'content' => $content,
-			'image_name' => $newImageName
+			'image_name' => $newImageName,
+			'image_alt' => $alt
 		];
 
 		$this->sql($sql, $parameters);
@@ -61,7 +63,7 @@ class ArticleDAO extends DAO
 	 */
 	public function getArticles()
 	{
-		$sql = 'SELECT id, chapter, title, content, author, DATE_FORMAT(date_added, "%d/%m/%Y à %Hh%i") AS date_added_fr, image_name FROM articles ORDER BY chapter';
+		$sql = 'SELECT id, chapter, title, content, author, DATE_FORMAT(date_added, "%d/%m/%Y à %Hh%i") AS date_added_fr, image_name, image_alt FROM articles ORDER BY chapter';
 		$data = $this->sql($sql);
 
 		$articles = [];
@@ -81,7 +83,7 @@ class ArticleDAO extends DAO
 	 */
 	public function getLastArticles()
 	{
-		$sql = 'SELECT id, chapter,title, content, author, DATE_FORMAT(date_added, "%d/%m/%Y à %Hh%i") AS date_added_fr, image_name FROM articles ORDER BY chapter DESC LIMIT 3';
+		$sql = 'SELECT id, chapter,title, content, author, DATE_FORMAT(date_added, "%d/%m/%Y à %Hh%i") AS date_added_fr, image_name, image_alt FROM articles ORDER BY chapter DESC LIMIT 3';
 		$data = $this->sql($sql);
 
 		$articles = [];
@@ -102,7 +104,7 @@ class ArticleDAO extends DAO
 	 */
 	public function getArticle($idArt)
 	{
-		$sql = 'SELECT id, chapter, title, content, author, DATE_FORMAT(date_added, "%d/%m/%Y à %Hh%i") AS date_added_fr, image_name FROM articles WHERE id = ?';
+		$sql = 'SELECT id, chapter, title, content, author, DATE_FORMAT(date_added, "%d/%m/%Y à %Hh%i") AS date_added_fr, image_name, image_alt FROM articles WHERE id = ?';
 		$data = $this->sql($sql, [$idArt]);		
 
 		$article = $this->buildArticle($data->fetch());
@@ -155,6 +157,7 @@ class ArticleDAO extends DAO
 		$article->setAuthor($row['author']);
 		$article->setDateAdded($row['date_added_fr']);
 		$article->setImageName($row['image_name']);
+		$article->setImageAlt($row['image_alt']);
 
 		return $article;
 	}

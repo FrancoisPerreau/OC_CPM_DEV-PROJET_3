@@ -19,7 +19,12 @@ class ImageModel
 		// Enregistre l'image
 		if(move_uploaded_file($file['tmp_name'], '../public/img/chapters/' . $newName))
 		{
-			if (file_exists('../public/img/chapters/' . $oldName))
+			// var_dump($oldName);
+			// var_dump('../public/img/chapters/' . $oldName);
+			// var_dump(!empty($oldName));
+			// var_dump(file_exists('../public/img/chapters/' . $oldName));
+
+			if (!empty($oldName))
 			{
 				unlink('../public/img/chapters/' . $oldName);
 			}

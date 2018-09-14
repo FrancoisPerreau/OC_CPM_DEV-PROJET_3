@@ -12,6 +12,7 @@ class ArticleModel
 	protected $_author;
 	protected $_dateAdded;
 	protected $_imageName;
+	protected $_imageAlt;
 
 
 
@@ -102,6 +103,17 @@ class ArticleModel
 		}		
 	}
 
+	/**
+	 * @param $imageAlt
+	 */
+	public function setImageAlt($imageAlt)
+	{
+		if (is_string($imageAlt) && strlen($imageAlt) < 255)
+		{
+			$this->_imageAlt = str_secur($imageAlt);
+		}		
+	}
+
 
 	// GETTERS ---------------------
 	/**
@@ -138,4 +150,9 @@ class ArticleModel
 	 * @return $_imageName
 	 */
 	public function getImageName() {return $this->_imageName;}
+
+	/**
+	 * @return $_imageName
+	 */
+	public function getImageAlt() {return $this->_imageAlt;}
 }
