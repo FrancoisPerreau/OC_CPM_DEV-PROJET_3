@@ -112,6 +112,30 @@ class ArticleDAO extends DAO
 		return $article;
 	}
 
+	public function getPreviousArticle($chapter)
+	{
+		$sql = 'SELECT id FROM articles WHERE chapter < ? ORDER BY chapter DESC LIMIT 1';
+		$parameter = [$chapter];
+
+		$req = $this->sql($sql, $parameter);
+
+		$article = $req->fetch();
+		
+		return $article['id'];
+	}
+
+
+	public function getNextArticle($chapter)
+	{
+		$sql = 'SELECT id FROM articles WHERE chapter > ? ORDER BY chapter LIMIT 1';
+		$parameter = [$chapter];
+
+		$req = $this->sql($sql, $parameter);
+
+		$article = $req->fetch();
+		
+		return $article['id'];
+	}
 
 	/**
 	 * Vérifie l'existance d'une donnée dans une colonne de la bd

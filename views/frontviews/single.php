@@ -18,7 +18,24 @@ $this->_title = $article->getTitle();
 		<h2 class="sigle-title"><?= str_secur($article->getTitle());?></h2>
 		<p class="text-muted">Publié le <?= str_secur($article->getDateAdded());?></p>
 		
-		<p class="article-content"><?= nl2br($article->getContent());?></p>			
+		<p class="article-content"><?= $article->getContent();?></p>			
+	</div>
+	<div class="nav_chapter row">
+		<div class="col-6">
+			<p>
+				<?php if (isset($previousArticle)): ?>
+					<a href="../public/index.php?route=article&idArt=<?= $previousArticle; ?>" class="btn btn-outline-info">&laquo; chapitre</a>
+				<?php endif ; ?>
+			</p>
+		</div>
+		<div class="col-6">
+			<p class="text-right">
+				<?php if (isset($nextArticle)): ?>
+					<a href="../public/index.php?route=article&idArt=<?= $nextArticle; ?>" class="btn btn-outline-info text-right">chapitre &raquo;</a>
+				<?php endif ; ?>
+			</p>
+		</div>
+		
 	</div>
 </section>
 

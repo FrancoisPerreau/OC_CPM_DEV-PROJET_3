@@ -37,9 +37,11 @@ class FrontController
 	 */
 	public function home()
 	{
-		$articles = $this->_articleDAO->getLastArticles();
+		$data = [];
 
-		$this->_view->renderFront('home', ['articles' => $articles]);
+		$data['articles'] = $this->_articleDAO->getLastArticles();		
+
+		$this->_view->renderFront('home', $data);
 	}
 
 	/**
@@ -73,8 +75,12 @@ class FrontController
 				header('location: ../public/index.php?route=article&idArt='. $idArt . '#comments_post');
 			}
 
+			$article = $this->_articleDAO->getArticle($idArt);
+
 			$data['article'] = $this->_articleDAO->getArticle($idArt);
 			$data['comments'] = $this->_commentDAO->getCommentsFromArticle($idArt);
+			$data['previousArticle'] = $this->_articleDAO->getPreviousArticle($article->getChapter());
+			$data['nextArticle'] = $this->_articleDAO->getNextArticle($article->getChapter());
 
 			$this->_view->renderFront('single', $data);
 

@@ -289,7 +289,7 @@ class BackController
 					$newImageName = $draft->getImageName();
 				}				
 
-				$this->_articleDAO->addArticle($chapter, $title, $newImageName, $content);	
+				$this->_articleDAO->addArticle($chapter, $title, $newImageName,$alt, $content);	
 
 				unset($chapter);
 				unset($title);
