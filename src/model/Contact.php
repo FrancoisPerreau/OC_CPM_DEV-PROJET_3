@@ -10,7 +10,7 @@ class Contact
 	{
 		if (!empty($post))
 		{
-			session_start();
+			//session_start();
 
 			extract($post);
 

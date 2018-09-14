@@ -204,7 +204,8 @@ class BackController
 			{				
 				if (!empty($_FILES['imageArticle']['name']))
 				{
-					$newImageName = ImageModel::savImage($_FILES['imageArticle']);
+					$oldName = $article->getImageName();
+					$newImageName = ImageModel::savImage($_FILES['imageArticle'], $oldName);
 				}
 				else
 				{
@@ -230,13 +231,14 @@ class BackController
 				$imageExist = true;
 			}
 
-			$data['error']=Control::controlAddArticleOrDraft($chapter, $title, $content, $status, $imageExis);
+			$data['error']=Control::controlAddArticleOrDraft($chapter, $title, $content, $status, $imageExist);
 			
 			if(!$data['error'])
 			{				
 				if (!empty($_FILES['imageArticle']['name']))
 				{
-					$newImageName = ImageModel::savImage($_FILES['imageArticle']);
+					$oldName = $draft->getImageName();
+					$newImageName = ImageModel::savImage($_FILES['imageArticle'], $oldName);
 				}
 				elseif ($imageExist)
 				{
