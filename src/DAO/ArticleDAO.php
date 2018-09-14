@@ -112,6 +112,12 @@ class ArticleDAO extends DAO
 		return $article;
 	}
 
+
+	/**
+	 * Retourne l'id du chapitre précédent
+	 * @param  $chapter
+	 * @return int
+	 */
 	public function getPreviousArticle($chapter)
 	{
 		$sql = 'SELECT id FROM articles WHERE chapter < ? ORDER BY chapter DESC LIMIT 1';
@@ -125,6 +131,11 @@ class ArticleDAO extends DAO
 	}
 
 
+	/**
+	 * Retourne l'id du chapitre suivant
+	 * @param  $chapter
+	 * @return int
+	 */
 	public function getNextArticle($chapter)
 	{
 		$sql = 'SELECT id FROM articles WHERE chapter > ? ORDER BY chapter LIMIT 1';

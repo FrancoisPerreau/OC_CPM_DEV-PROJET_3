@@ -52,11 +52,13 @@ class AdminModel
 		return $error;
 	}
 
-
+	/**
+	 * Déconnexion de l'administration
+	 */
 	public function deconnectionAdmin()
 	{
 		// Initialisation de la session.
-		session_start();
+		//session_start();
 
 		// Détruit toutes les variables de session
 		$_SESSION= [];

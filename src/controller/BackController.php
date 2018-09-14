@@ -95,8 +95,10 @@ class BackController
 
 	public function adminDeconnection()
 	{
+		$data['articles'] = $this->_articleDAO->getArticles();
+
 		$this->_adminModel->deconnectionAdmin();
-		$this->_view->renderFront('home');
+		$this->_view->renderFront('home', $data);
 	}
 
 	/**
