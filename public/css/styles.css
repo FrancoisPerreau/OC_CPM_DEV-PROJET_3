@@ -41,7 +41,10 @@ h2 {
 
 section {
 	padding: 60px 0;
+}
 
+.container-front-h100 {
+	min-height: calc(100vh - 656px);
 }
 
 .bg-dark {
@@ -180,3 +183,13 @@ section {
 }
 
 
+
+.error-container {
+	/*height: 100%;*/
+	display: flex;
+
+	justify-content: center;
+	flex-direction: column;
+	align-content: center;
+	
+}

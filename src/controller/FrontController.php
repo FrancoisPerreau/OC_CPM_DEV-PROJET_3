@@ -5,6 +5,7 @@ use cyannlab\src\DAO\ArticleDAO;
 use cyannlab\src\DAO\CommentDAO;
 use cyannlab\src\model\Contact;
 use cyannlab\src\model\View;
+use Exception;
 
 class FrontController
 {
@@ -96,7 +97,9 @@ class FrontController
 		}
 		else
 		{
-			echo 'cet article n\'existe pas.';
+			throw new Exception('Ce chapitre n\'existe pas, ou plus.');
+			
+			//echo 'cet article n\'existe pas.';
 		}
 	}
 
@@ -138,5 +141,12 @@ class FrontController
 		{
 			unset($_SESSION['success']);
 		}
+	}
+
+
+	public function errorPage($error)
+	{
+		$data['error'] = $error;
+		$this->_view->renderFront('errorPage', $data);
 	}
 }

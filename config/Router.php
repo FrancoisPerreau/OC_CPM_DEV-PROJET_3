@@ -4,6 +4,8 @@ namespace cyannlab\config;
 use cyannlab\src\controller\FrontController;
 use cyannlab\src\controller\BackController;
 
+use Exception;
+
 class Router
 {
 	// ATTRIBUT
@@ -94,9 +96,7 @@ class Router
 				// ADMIN-HOME ------------------------------
 				elseif ($_GET['route'] === 'adminHome')
 				{
-					
 					$this->_backController->adminHome();
-
 				}
 
 				// ADMIN-DELETE ------------------------------
@@ -162,10 +162,8 @@ class Router
 
 				// ADMIN-CREATE CHAPTER ------------------------
 				elseif ($_GET['route'] === 'adminCreate')
-				{
-					
+				{					
 					$this->_backController->adminCreate();
-
 				}	
 
 				// ADMIN-COMMENTS ------------------------------
@@ -192,13 +190,14 @@ class Router
 					{
 						$this->_backController->adminProfil();
 					}
-				}		
-
+				}
 
 
 				else
 				{
-					echo 'Cette page n\'existe pas';
+					throw new Exception('Cette page n\'existe pas');
+					
+					//echo 'Cette page n\'existe pas';
 				}
 			}
 
@@ -210,7 +209,7 @@ class Router
 		}
 		catch (Exception $e)
 		{
-			echo 'Erreur';
+			$this->_frontController->errorPage( $e->getMessage() );
 		}
 	}
 }
