@@ -1,6 +1,6 @@
 <?php
 //session_start();
-$this->setTitle('ADMIN-Créer un chapitre');
+$this->setTitle('ADMIN-Créer');
 $title = $this->getPageTitle();
 ?>
 

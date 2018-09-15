@@ -1,5 +1,5 @@
 <?php 
-$this->_title = $article->getTitle();
+$this->_title = 'Chapitre ' . $article->getChapter();
 ?>
 <div class="container-fluid  infos-top">
 	<div class="container">

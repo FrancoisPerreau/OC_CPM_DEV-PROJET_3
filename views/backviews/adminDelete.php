@@ -1,5 +1,5 @@
 <?php 
-$this->setTitle('Supprimer');
+$this->setTitle('ADMIN-Supprimer');
 $title = $this->getPageTitle();
 ?>
 <div class="container-fluid bgcg container-h100">
