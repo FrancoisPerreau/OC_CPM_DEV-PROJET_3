@@ -179,7 +179,7 @@ class Router
 					}
 				}
 
-				// ADMIN-PROFIL ------------------------
+				// ADMIN-PROFIL --------------------------------
 				elseif ($_GET['route'] === 'adminProfil')
 				{
 					if (isset($_GET['action']) && ($_GET['action'] === 'updatePseudo' || $_GET['action'] === 'updateMail' || $_GET['action'] === 'updatePass'))
@@ -190,6 +190,12 @@ class Router
 					{
 						$this->_backController->adminProfil();
 					}
+				}
+
+				// ADMIN-MENTIONS LÉGALES ---------------------
+				elseif ($_GET['route'] === 'mentions')
+				{
+					$this->_frontController->mentions();
 				}
 
 

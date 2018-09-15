@@ -149,4 +149,14 @@ class FrontController
 		$data['error'] = $error;
 		$this->_view->renderFront('errorPage', $data);
 	}
+
+
+	/**
+	 * Controller de la vue Mentions légales
+	 */
+	public function mentions()
+	{
+		$this->_view->renderFront('mentionsLegales');
+	}
+
 }
