@@ -29,7 +29,7 @@
         <li class="nav-item  <?= (empty($_GET['route'])) ? 'active' : '' ; ?>">
           <a class="nav-link" href="../public/index.php">Accueil</a></li>
           <li class="nav-item <?= (isset($_GET['route']) && $_GET['route'] === 'liste') ? 'active' : '' ; ?>">
-            <a class="nav-link" href="../public/index.php?route=liste">Les chapitres</a>
+            <a class="nav-link" href="../public/index.php?route=liste&amp;page=1">Les chapitres</a>
           </li>
           <li class="nav-item <?= (isset($_GET['route']) && $_GET['route'] === 'contact') ? 'active' : '' ; ?>">
             <a class="nav-link" href="../public/index.php?route=contact">contact</a>

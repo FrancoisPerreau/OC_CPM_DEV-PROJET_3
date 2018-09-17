@@ -50,9 +50,41 @@ class FrontController
 	 */
 	public function listeArticles()
 	{
-		$articles = $this->_articleDAO->getArticles();
+		//$articles = $this->_articleDAO->getArticles();
 
-		$this->_view->renderFront('listearticles', ['articles' => $articles]);
+		$data = [];
+
+		$data['perPage'] = $perPage = 3;
+		$data['totalArticles'] = $totalArticles = $this->_articleDAO->nbOfArticles();
+		$data['nbPages'] = $nbPages = ceil($totalArticles / $perPage); // ceil() arrondi à l'entier supérieur
+
+		// Détermine la page courante
+		if (isset($_GET['page']) && !empty($_GET['page']) && $_GET['page'] > 0)
+		{
+			$_GET['page'] = intval($_GET['page']);
+
+			if ($_GET['page'] > $nbPages)
+			{
+				$data['currentPage'] = $currentPage = $nbPages;
+			}
+			else
+			{
+				$data['currentPage'] = $currentPage = $_GET['page'];
+			}			
+		}
+		else
+		{
+			$data['currentPage'] = $currentPage = 1;
+		}
+
+		// Détermine le premier article de la page (pour le LIMIT de la requête)
+		$firstOfPage = ($currentPage - 1) * $perPage;
+
+
+		$data['articles'] = $this->_articleDAO->getArticlesPerPage($firstOfPage, $perPage);
+		
+
+		$this->_view->renderFront('listearticles', $data);
 	}
 
 	/**

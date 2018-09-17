@@ -77,6 +77,35 @@ class ArticleDAO extends DAO
 	}
 
 
+	public function nbOfArticles()
+	{
+		$sql = 'SELECT id FROM articles';
+		$req = $this->sql($sql);
+		$totalarticles = $req->rowCount();
+		return $totalarticles;
+	}
+
+
+	public function getArticlesPerPage($firstOfPage, $perPage)
+	{
+		
+		$sql = 'SELECT id, chapter, title, content, author, DATE_FORMAT(date_added, "%d/%m/%Y à %Hh%i") AS date_added_fr, image_name, image_alt FROM articles ORDER BY chapter LIMIT ' .$firstOfPage . ', ' .$perPage . '';
+		
+		$data = $this->sql($sql);
+
+		$articles = [];
+
+		foreach ($data->fetchAll() as $row)
+		{
+			$articles[] = $this->buildArticle($row);
+		}
+
+		return $articles; 
+	}
+
+
+
+
 	/**
 	 * Retourne la requette pour la liste des articles classés par chapitre triée en ordre decroissant
 	 * @return array
