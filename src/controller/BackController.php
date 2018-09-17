@@ -317,6 +317,9 @@ class BackController
 		{
 			$this->_commentDAO->moderateComment($idComment);
 			
+		}elseif ($action === 'reset')
+		{
+			$this->_commentDAO->resetCountReportedComments($idComment);
 		}
 
 		$data['reportedComments'] = $this->_commentDAO->getReoprtedComments();

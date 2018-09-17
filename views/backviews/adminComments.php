@@ -22,8 +22,11 @@ $title = $this->getPageTitle();
 							<li class="list-group-item list-group-item-info list-groupe-title">
 								<p class="text-muted comment-list">
 									<span class="badge badge-warning reported"><?= str_secur($reportedComment->getReported()); ?></span> Signalement(s)
-								</p>								
-								<a href="../public/index.php?route=adminComments&amp;action=moderate&amp;idComment=<?= str_secur($reportedComment->getId()); ?>" class="btn btn-outline-info btn-sm">en attente</a>
+								</p>	
+								<span>						
+									<a href="../public/index.php?route=adminComments&amp;action=moderate&amp;idComment=<?= str_secur($reportedComment->getId()); ?>" class="btn btn-outline-danger btn-sm">modérer</a>
+									<a href="../public/index.php?route=adminComments&amp;action=reset&amp;idComment=<?= str_secur($reportedComment->getId()); ?>" class="btn btn-outline-info btn-sm"">ignorer</a>
+								</span>	
 							</li>
 
 							<li class="list-group-item">

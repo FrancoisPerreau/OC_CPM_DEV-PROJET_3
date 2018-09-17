@@ -140,10 +140,25 @@ class CommentDAO extends DAO
 		return $nbReported;
 	}
 
+
+	/**
+	 * Remise à zéro du compteur de commentaires signalés
+	 * @param  int $id
+	 */
+	public function resetCountReportedComments($id)
+	{
+		$sql = 'UPDATE comments SET reported = 0 WHERE id = ?';
+		$parameter = [str_secur($id)];
+		$this->sql($sql, $parameter);
+	}
+
+
+	/**
+	 * Retourne le nombre de commentaires signalés et non modérés
+	 * @return int
+	 */
 	public function getCountNotModerateComment()
 	{
-		//$sql = 'SELECT COUNT(reported) AS nbNotModerate FROM comments WHERE moderate = false';
-		//$sql = 'SELECT COUNT(reported) AS nbNotModerate FROM comments GROUP BY moderate = false';
 		$sql = 'SELECT COUNT(*) AS nbNotModerate FROM comments WHERE moderate = true';
 		$req = $this->sql($sql);
 		$data = $req->fetch();

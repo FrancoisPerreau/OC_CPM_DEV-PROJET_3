@@ -173,6 +173,10 @@ class Router
 					{
 						$this->_backController->adminComments(str_secur($_GET['action']), str_secur($_GET['idComment']));
 					}
+					elseif (isset($_GET['action']) && $_GET['action'] === 'reset')
+					{
+						$this->_backController->adminComments(str_secur($_GET['action']), str_secur($_GET['idComment']));
+					}
 					else
 					{
 						$this->_backController->adminComments();
