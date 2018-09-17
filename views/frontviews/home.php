@@ -23,7 +23,7 @@ $title = $this->getPageTitle();
 
 
 <section class="container">
-  <h2 class="text-center">Les dérniers chapitres</h2>
+  <h2 class="text-center">Les derniers chapitres</h2>
   <div class="row">
     <?php foreach ($articles as $article):?>
       <div class="col-lg-4 block-resum">

@@ -36,8 +36,6 @@ class AdminModel
 	 */
 	public function connectAdmin($name, $password)
 	{
-		session_start();
-
 		if($this->accountExists($name, $password))
 		{
 			$_SESSION['id'] = $this->_user->getId();
