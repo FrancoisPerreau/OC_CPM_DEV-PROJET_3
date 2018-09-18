@@ -1,5 +1,5 @@
 <footer class="container-fluid">
-	<p><?= AUTHOR; ?> - 2017-2018 </p>
+	<p><?= AUTHOR . ' - ' . date('Y'); ?></p>
 	<p><a class="text-muted" href="../public/index.php?route=mentions">Mentions légales</a></p>
 </footer>
 
