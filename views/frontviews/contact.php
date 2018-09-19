@@ -2,7 +2,7 @@
 $this->setTitle('Contact');
 $title = $this->getPageTitle();
 ?>
-<div class="container-fluid bgcg">
+<div class="container-fluid bgcg container-front-h100">
 
 	<section class="container">		
 		<h1 id="contact" class="col-12 col-md-6 offset-md-3 contact-title text-center">Contactez-moi...</h1>

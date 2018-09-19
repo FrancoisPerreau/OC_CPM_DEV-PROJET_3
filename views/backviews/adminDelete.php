@@ -5,7 +5,7 @@ $title = $this->getPageTitle();
 <div class="container-fluid bgcg container-h100">
 	<div class="container container-admin-delete text-center">	
 		<h3 class="delete-title">
-			Vous vous apprêtez à supprmimer le <br>
+			Vous vous apprêtez à supprimer le <br>
 			<span class="text-uppercase">
 				<?= (isset($article)) ? 'Chapitre n° : ' . $article->getChapter() : '' ;?>
 				<?= (isset($draft)) ? 'Brouillon n° : ' . $draft->getChapter() : '' ;?>

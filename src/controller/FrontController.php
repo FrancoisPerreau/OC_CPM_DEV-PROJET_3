@@ -54,7 +54,7 @@ class FrontController
 
 		$data = [];
 
-		$data['perPage'] = $perPage = 3;
+		$data['perPage'] = $perPage = 6;
 		$data['totalArticles'] = $totalArticles = $this->_articleDAO->nbOfArticles();
 		$data['nbPages'] = $nbPages = ceil($totalArticles / $perPage); // ceil() arrondi à l'entier supérieur
 

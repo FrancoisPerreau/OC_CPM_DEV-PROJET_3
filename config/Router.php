@@ -206,8 +206,6 @@ class Router
 				else
 				{
 					throw new Exception('Cette page n\'existe pas');
-					
-					//echo 'Cette page n\'existe pas';
 				}
 			}
 
