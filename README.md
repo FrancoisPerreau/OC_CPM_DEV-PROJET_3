@@ -1,5 +1,5 @@
 # Blog
-## Créez un blog (PHP et MySQL)
+## Création d'un blog (PHP et MySQL)
 
 - front-end
 - back-end
