@@ -391,9 +391,11 @@ class BackController
 	}
 
 
+	/**
+	 * Controller de la vue adminProfil
+	 */
 	public function adminProfil($action = null)
-	{
-		
+	{		
 		$data['error'] = [];
 
 		extract($_POST);

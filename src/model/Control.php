@@ -91,7 +91,7 @@ class Control
 
 	
 
-	// PROFIL
+	// PROFIL PSEUDO
 	static function controlProfilPseudo($pseudo)
 	{
 		$error = [];
@@ -103,6 +103,8 @@ class Control
 		return $error;
 	}
 
+
+	// PROFIL MAIL
 	static function controlProfilMail($mail)
 	{
 		$error = [];
@@ -117,6 +119,8 @@ class Control
 		return $error;
 	}
 
+
+	// PROFIL PASSWORD
 	static function controlProfilPassword($password, $passwordConfirm)
 	{
 		$error = [];
