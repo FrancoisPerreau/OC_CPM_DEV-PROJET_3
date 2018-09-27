@@ -7,6 +7,43 @@ class Control
 	// MÉTHODES
 	// =============================
 
+	// CONTACT
+	static function controlContactForm($firstName, $lastName, $email, $content)
+	{
+		$error = [];
+
+		// Vérification firstName
+		if (empty($firstName))
+		{
+			$error['errorFirstName'] = 'Prénom manquant';				
+		}
+
+		// Vérification lastName
+		if (empty($lastName))
+		{
+			$error['errorLastName'] = 'Nom manquant';				
+		}
+
+		// Vérification email
+		if (empty($email))
+		{
+			$error['errorEmail'] = 'Adresse E-mail manquante';				
+		}
+		elseif (!filter_var($email, FILTER_VALIDATE_EMAIL))
+		{
+			$error['errorEmail'] = 'Veuillez saisir une adresse E-mail valide';
+		}
+
+		// Vérification content
+		if (empty($content))
+		{
+			$error['errorContent'] = 'Message manquant';
+		}
+
+		return $error;
+	}
+
+
 	// ADD CHAPITRE OU BROUILLON
 	static function controlAddArticleOrDraft($chapter, $title, $content, $status, $imageExist = null)
 	{	
