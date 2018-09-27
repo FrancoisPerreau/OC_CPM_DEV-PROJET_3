@@ -95,18 +95,25 @@ class FrontController
 	{
 		if ($this->_articleDAO->articleDataExists('id', $idArt))
 		{			
-			$data =[];
-
+			$data = [];
+			
 			if ($action === 'addComment')
 			{
-				$this->_commentDAO->addComment($_POST, $idArt);	
-				header('location: ../public/index.php?route=article&idArt='. $idArt . '#comments_post');		
+				extract($_POST);
+				
+				$data['error'] = Control::controlAddComment($pseudo, $content);
+				
+				if (empty($data['error']))
+				{
+					$this->_commentDAO->addComment($pseudo, $content, $idArt);
+					$data['success'] = '';
+					
+				}				
 			}
 
 			if ($action === 'reported')
 			{				
 				$this->_commentDAO->reportedComment($idComment, $idArt, $nbReporte);
-				header('location: ../public/index.php?route=article&idArt='. $idArt . '#comments_post');
 			}
 
 			$article = $this->_articleDAO->getArticle($idArt);
@@ -114,25 +121,13 @@ class FrontController
 			$data['article'] = $this->_articleDAO->getArticle($idArt);
 			$data['comments'] = $this->_commentDAO->getCommentsFromArticle($idArt);
 			$data['previousArticle'] = $this->_articleDAO->getPreviousArticle($article->getChapter());
-			$data['nextArticle'] = $this->_articleDAO->getNextArticle($article->getChapter());
-
+			$data['nextArticle'] = $this->_articleDAO->getNextArticle($article->getChapter());			
+			
 			$this->_view->renderFront('single', $data);
-
-			if (isset($_SESSION['errorPseudo']))
-			{
-				unset($_SESSION['errorPseudo']);
-			}
-
-			if (isset($_SESSION['errorContent']))
-			{
-				unset($_SESSION['errorContent']);
-			}
 		}
 		else
 		{
 			throw new Exception('Ce chapitre n\'existe pas, ou plus.');
-			
-			//echo 'cet article n\'existe pas.';
 		}
 	}
 

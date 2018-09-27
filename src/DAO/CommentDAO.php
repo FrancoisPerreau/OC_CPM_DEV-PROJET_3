@@ -14,15 +14,10 @@ class CommentDAO extends DAO
 	 * @param string $post
 	 * @param string $idArt
 	 */
-	public function addComment($post, $idArt)
-	{
-		extract($post);
-		
-		if (CommentModel::controlAddComment($pseudo, $content))
-		{
-			$sql = 'INSERT INTO comments(pseudo, content, date_added, article_id) VALUES(?, ?, NOW(), ?)';
-			$this->sql($sql, [str_secur($pseudo), str_secur($content), $idArt]);
-		}		
+	public function addComment($pseudo, $content, $idArt)
+	{		
+		$sql = 'INSERT INTO comments(pseudo, content, date_added, article_id) VALUES(?, ?, NOW(), ?)';
+		$this->sql($sql, [str_secur($pseudo), str_secur($content), $idArt]);		
 	}
 
 

@@ -48,17 +48,17 @@ $this->_title = 'Chapitre ' . $article->getChapter();
 			<!-- Affichage du formulaire -->
 			<div class="comments_form_container">
 				<h4>Ajouter un commentaire</h4>
-				<form  action="../public/index.php?route=article&amp;idArt=<?= str_secur($article->getId()) ;?>&amp;action=addComment" method="post">
+				<form  action="../public/index.php?route=article&amp;idArt=<?= str_secur($article->getId()) ;?>&amp;action=addComment#comments_post" method="post">
 					<div class="form-group">
 						<label for="pseudo">Pseudo</label><br>
-						<input type="text" id="pseudo" name="pseudo" class="form-control" required value="<?= (!empty($_POST['pseudo'])) ? $_POST['pseudo'] :'' ; ?>">
-						<?= (isset($_SESSION['errorPseudo'])) ? '<div class="text-danger">' . $_SESSION['errorPseudo'] . '</div>' :''; ?>
+						<input type="text" id="pseudo" name="pseudo" class="form-control" required value="<?= (!empty($_POST['pseudo']) && !isset($success)) ? $_POST['pseudo'] :'' ; ?>">
+						<?= (isset($error['errorPseudo'])) ? '<div class="text-danger">' . $error['errorPseudo'] . '</div>' :''; ?>
 						
 					</div>
 					<div class="form-group">
 						<label for="content">Message</label><br>
-						<textarea name="content" id="content" class="form-control" required cols="30" rows="3"><?= (!empty($_POST['content'])) ? $_POST['content'] :'' ; ?></textarea>
-						<?= (isset($_SESSION['errorContent'])) ? '<p>' . $_SESSION['errorContent'] . '</p>' :''; ?>
+						<textarea name="content" id="content" class="form-control" required cols="30" rows="3"><?= (!empty($_POST['content']) && !isset($success)) ? $_POST['content'] :'' ; ?></textarea>
+						<?= (isset($error['errorContent'])) ? '<p>' . $error['errorContent'] . '</p>' :''; ?>
 					</div>
 					<button class="btn btn-outline-info btn-block" type="submit">Envoyer</button>
 				</form>
@@ -71,7 +71,7 @@ $this->_title = 'Chapitre ' . $article->getChapter();
 					<li class="list-group-item list-group-item-info list-groupe-title"><strong><?= str_secur($comment->getPseudo()); ?> <span class="date font-weight-light">- le <?= str_secur($comment->getDateAdded()); ?></span></strong>
 						
 						
-						<a class="btn btn-outline-info btn-sm" href="../public/index.php?route=article&amp;idArt=<?= str_secur($article->getId());?>&amp;action=reported&amp;idComment=<?= str_secur($comment->getId());?>&amp;nbReported=<?= str_secur($comment->getReported());?>">Signaler ce commentaire 
+						<a class="btn btn-outline-info btn-sm" href="../public/index.php?route=article&amp;idArt=<?= str_secur($article->getId());?>&amp;action=reported&amp;idComment=<?= str_secur($comment->getId());?>&amp;nbReported=<?= str_secur($comment->getReported());?>#comments_post">Signaler ce commentaire 
 							<?php if($comment->getReported() > 0) : ?>
 								<span class="badge badge-warning reported"><?= str_secur($comment->getReported()); ?></span>
 							<?php endif; ?>

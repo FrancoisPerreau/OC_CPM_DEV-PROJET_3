@@ -7,6 +7,29 @@ class Control
 	// MÉTHODES
 	// =============================
 
+	// ADD COMMENT
+	static function controlAddComment($pseudo, $content)
+	{
+		$error = [];
+
+		if (empty($pseudo))
+		{
+			$error['errorPseudo'] = 'Vous devez saisir un pseudo';
+		}
+		elseif (strlen($pseudo) >= 100) {
+			$error['errorPseudo'] = 'Vous devez saisir un pseudo de moins de 100 caractères.';
+		}
+
+		if (empty($content))
+		{
+			$error['errorContent'] = 'Vous devez saisir un message.';
+		}
+
+		return $error;
+	}
+
+
+
 	// CONTACT
 	static function controlContactForm($firstName, $lastName, $email, $content)
 	{
