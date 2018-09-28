@@ -74,8 +74,8 @@ class CommentDAO extends DAO
 		$comment->setReported($row['reported']);
 		$comment->setModerate($row['moderate']);
 
-
 		$comment->setArticleId($row['article_id']);
+
 		if (isset($row['artChapter'])) {
 			$comment->setArticleChapter($row['artChapter']);
 		}
